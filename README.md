@@ -2,44 +2,55 @@
 
 > **Bộ sưu tập Skills mở rộng cho OpenClaw** — được tuyển chọn và phát triển bởi [MCB AI](https://mcbai.vn)
 
-Tất cả skills trong repo này đều plug-and-play: tải về, copy vào `~/.agents/skills/`, dùng ngay.
+Tất cả skills trong repo này đều plug-and-play: tải về, copy vào `~/.agents/skills/`, dùng ngay — không cần code, không cần cấu hình phức tạp.
 
 ---
 
-## Skills hiện có
+## Danh sách Skills
 
-| Skill | Mô tả | Nền tảng |
-|-------|-------|----------|
-| [download-aio](skills/download-aio/) | Tải video/audio từ 1000+ nền tảng (YouTube, TikTok, Facebook...) | Windows |
+### 📥 [download-aio](skills/download-aio/)
+**Tải video/audio từ 1000+ nền tảng**
 
-> Sẽ cập nhật thêm thường xuyên. Star repo để không bỏ lỡ 🌟
+Dùng yt-dlp để tải video, audio, playlist, subtitle từ YouTube, TikTok, Facebook, Instagram, Twitter/X và hơn 1000 trang khác. Sau khi tải tự động gửi file về Telegram.
+
+> Trigger: paste URL vào chat là xong
 
 ---
 
-## Cách cài đặt
+> 🔄 Sẽ cập nhật thêm skills thường xuyên. **Star repo** để không bỏ lỡ 🌟
 
-### Cài 1 skill cụ thể
+---
+
+## Cách cài đặt skill
+
+### Bước 1 — Clone repo
 
 ```bash
-# Clone repo
 git clone https://github.com/mcb0809/openclaw-skills-mcbai.git
-
-# Copy skill muốn dùng vào thư mục skills của OpenClaw
-cp -r openclaw-skills-mcbai/skills/download-aio ~/.agents/skills/
 ```
 
 **Windows (PowerShell):**
 ```powershell
 git clone https://github.com/mcb0809/openclaw-skills-mcbai.git
-Copy-Item -Recurse openclaw-skills-mcbai\skills\download-aio $env:USERPROFILE\.agents\skills\
 ```
 
-### Cài toàn bộ skills
+### Bước 2 — Copy skill muốn dùng vào OpenClaw
 
 ```bash
-git clone https://github.com/mcb0809/openclaw-skills-mcbai.git
-cp -r openclaw-skills-mcbai/skills/* ~/.agents/skills/
+# macOS / Linux
+cp -r openclaw-skills-mcbai/skills/<tên-skill> ~/.agents/skills/
+
+# Windows (PowerShell)
+Copy-Item -Recurse openclaw-skills-mcbai\skills\<tên-skill> $env:USERPROFILE\.agents\skills\
 ```
+
+### Bước 3 — Chạy script cài đặt (nếu skill yêu cầu)
+
+Mỗi skill có thể có file `scripts/install.ps1` hoặc `scripts/install.sh` để cài dependencies tự động. Xem README của từng skill để biết chi tiết.
+
+### Bước 4 — Dùng ngay!
+
+Mở chat với OpenClaw agent và gọi skill theo hướng dẫn trong README của từng skill.
 
 ---
 
@@ -47,20 +58,24 @@ cp -r openclaw-skills-mcbai/skills/* ~/.agents/skills/
 
 ```
 openclaw-skills-mcbai/
-├── README.md
+├── README.md                        ← Bạn đang đọc file này
 └── skills/
-    ├── download-aio/          # Tải video từ 1000+ nền tảng
-    │   ├── SKILL.md
-    │   ├── scripts/
-    │   │   ├── install.ps1    # Cài đặt tự động
-    │   │   ├── check.ps1      # Kiểm tra dependencies
-    │   │   └── find-python.ps1
-    │   └── references/
-    │       ├── commands.md    # Lệnh chi tiết
-    │       ├── platforms.md   # Danh sách nền tảng
-    │       └── troubleshooting.md
+    ├── download-aio/                ← Skill tải video AIO
+    │   ├── README.md                ← Hướng dẫn chi tiết skill
+    │   ├── SKILL.md                 ← File điều khiển agent (không cần đọc)
+    │   ├── scripts/                 ← Scripts cài đặt + tiện ích
+    │   └── references/              ← Tài liệu tham khảo cho agent
     └── (skills tiếp theo...)
 ```
+
+> **Lưu ý:** `SKILL.md` là file OpenClaw đọc để hiểu cách dùng skill — bạn không cần đọc file này. Chỉ cần đọc `README.md` của từng skill là đủ.
+
+---
+
+## Yêu cầu
+
+- [OpenClaw](https://openclaw.mcbai.vn/) đã được cài đặt và cấu hình
+- Mỗi skill có thể có yêu cầu riêng — xem README của từng skill
 
 ---
 
@@ -84,4 +99,4 @@ Có skill hay muốn chia sẻ? Tạo Pull Request hoặc liên hệ qua Fanpage
 
 ---
 
-<p align="center">Made with ❤️ by <a href="https://mcbai.vn">MCB AI</a> · <a href="https://openclaw.mcbai.vn/openclaw101">Học OpenClaw 101</a></p>
+<p align="center">Made with ❤️ by <a href="https://mcbai.vn">MCB AI</a> &nbsp;·&nbsp; <a href="https://openclaw.mcbai.vn/openclaw101">Học OpenClaw 101 →</a></p>
