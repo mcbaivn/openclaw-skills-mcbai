@@ -19,7 +19,22 @@ Hỏi user nếu chưa có:
 
 ### Step 2: Parse file SRT
 
-Dùng `scripts/parse-srt.py` để đọc và parse file SRT thành danh sách objects:
+Dùng `scripts/parse-srt.py` để đọc và parse file SRT. Script tự động detect encoding:
+
+**Encoding được hỗ trợ:**
+- UTF-8, UTF-8 BOM, UTF-16 LE/BE, UTF-32
+- GB18030 / GBK / GB2312 (Tiếng Trung giản thể)
+- Big5 (Tiếng Trung phồn thể)
+- Shift-JIS, EUC-JP (Tiếng Nhật)
+- EUC-KR, CP949 (Tiếng Hàn)
+- Windows-1252/1250/1251 (Latin/Trung Âu/Cyrillic)
+- Latin-1 (fallback cuối cùng, không bao giờ lỗi)
+
+**Thứ tự detect:**
+1. BOM bytes (chính xác nhất)
+2. chardet library (nếu đã cài: `pip install chardet`)
+3. Thử lần lượt từng encoding phổ biến + kiểm tra timecode pattern
+4. Fallback latin-1
 
 ```python
 # Mỗi subtitle block:
@@ -33,7 +48,8 @@ Dùng `scripts/parse-srt.py` để đọc và parse file SRT thành danh sách o
 Chạy:
 ```powershell
 python scripts/parse-srt.py "path/to/file.srt"
-# Output: JSON array ra stdout
+# Output: JSON array ra stdout (UTF-8)
+# Encoding detected sẽ log ra stderr
 ```
 
 ### Step 3: Dịch theo lô (batch)

@@ -1,76 +1,64 @@
 #!/usr/bin/env python3
 """
-build-srt.py - Ghép subtitles đã dịch thành file SRT
+build-srt.py - Ghép subtitles đã dịch thành file SRT chuẩn
 Usage: python build-srt.py <original.srt> <translated.json> <output.srt>
-
-- Lấy timecodes từ file SRT gốc
-- Lấy text đã dịch từ JSON
-- Xuất file SRT hoàn chỉnh
 """
 
 import sys
 import json
-import re
+import os
+import importlib.util
 
-def parse_srt_timecodes(filepath):
-    """Đọc file SRT gốc, trả về dict {id: timecode}"""
-    with open(filepath, 'r', encoding='utf-8-sig') as f:
-        content = f.read()
 
-    content = content.replace('\r\n', '\n').replace('\r', '\n')
-    blocks = re.split(r'\n\s*\n', content.strip())
-
-    timecodes = {}
-    for block in blocks:
-        lines = block.strip().split('\n')
-        if len(lines) < 2:
-            continue
-        try:
-            sub_id = int(lines[0].strip())
-            timecode = lines[1].strip()
-            if '-->' in timecode:
-                timecodes[sub_id] = timecode
-        except (ValueError, IndexError):
-            continue
-
-    return timecodes
+def parse_timecodes(filepath):
+    """Đọc timecodes từ file SRT gốc bằng parse-srt.py"""
+    spec = importlib.util.spec_from_file_location(
+        "parse_srt",
+        os.path.join(os.path.dirname(__file__), "parse-srt.py")
+    )
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    subtitles = mod.parse_srt(filepath)
+    return {s['id']: s['timecode'] for s in subtitles}
 
 
 def build_srt(original_path, translated_json_path, output_path):
-    # Đọc timecodes từ file gốc
-    timecodes = parse_srt_timecodes(original_path)
+    timecodes = parse_timecodes(original_path)
 
-    # Đọc translations
     with open(translated_json_path, 'r', encoding='utf-8') as f:
         translations = json.load(f)
 
-    # Build SRT content
-    lines = []
-    for item in sorted(translations, key=lambda x: x['id']):
+    translations_sorted = sorted(translations, key=lambda x: x['id'])
+
+    srt_lines = []
+    for item in translations_sorted:
         sub_id = item['id']
         text = item['text']
         timecode = timecodes.get(sub_id, '')
 
         if not timecode:
+            print(f"[build-srt] Warning: no timecode for id {sub_id}, skipping", file=sys.stderr)
             continue
 
-        lines.append(str(sub_id))
-        lines.append(timecode)
-        lines.append(text)
-        lines.append('')  # Dòng trống giữa blocks
+        srt_lines.append(str(sub_id))
+        srt_lines.append(timecode)
+        srt_lines.append(text)
+        srt_lines.append('')
 
-    srt_content = '\n'.join(lines)
+    srt_content = '\n'.join(srt_lines)
 
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(srt_content)
 
-    return len(translations)
+    return len(translations_sorted)
 
 
 if __name__ == '__main__':
     if len(sys.argv) < 4:
         print('Usage: python build-srt.py <original.srt> <translated.json> <output.srt>', file=sys.stderr)
         sys.exit(1)
+
+    sys.stdout.reconfigure(encoding='utf-8')
 
     original_path = sys.argv[1]
     translated_json_path = sys.argv[2]
