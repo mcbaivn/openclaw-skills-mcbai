@@ -1,5 +1,7 @@
 # OpenClaw Skills — MCBAI
 
+[![License: MIT-0](https://img.shields.io/badge/License-MIT--0-brightgreen.svg)](LICENSE)
+
 > **Bộ sưu tập Skills mở rộng cho OpenClaw** — được tuyển chọn và phát triển bởi [MCB AI](https://www.mcbai.vn)
 
 Tất cả skills trong repo này đều plug-and-play: tải về, copy vào `~/.agents/skills/`, dùng ngay — không cần code, không cần cấu hình phức tạp.
