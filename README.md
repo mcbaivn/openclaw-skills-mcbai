@@ -17,8 +17,13 @@ Tất cả skills trong repo này đều plug-and-play: tải về, copy vào `~
 
 ---
 
-### 📝 Content (`skills/content/`) *(sắp ra mắt)*
-*Viết bài, tạo nội dung, quản lý content*
+### 📝 Content (`skills/content/`)
+*Nghiên cứu, viết bài, tạo nội dung LinkedIn*
+
+| Skill | Mô tả | Platform |
+|-------|-------|----------|
+| [content-research](skills/content/content-research/) | Tìm bài viết & tin tức trending từ web (Brave + Tavily song song) | All |
+| [content-writer](skills/content/content-writer/) | Viết LinkedIn post từ nguồn bài (4 format, 6 tone, EN/VI) | All |
 
 ### 📊 Phân Tích (`skills/phan-tich/`) *(sắp ra mắt)*
 *Phân tích dữ liệu, báo cáo, thống kê*
