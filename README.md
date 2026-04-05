@@ -11,6 +11,24 @@ Một skill có thể thuộc nhiều category.
 
 ---
 
+## ⚡ Tải toàn bộ Skills về ngay
+
+```powershell
+# Windows - tải và cài tất cả skills 1 lệnh
+git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && `
+Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\skills\
+```
+
+```bash
+# macOS / Linux
+git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && \
+cp -r openclaw-skills-mcbai/skills/*/* ~/.agents/skills/
+```
+
+> Lệnh trên sẽ copy tất cả skills từ mọi category vào `~/.agents/skills/` một lần.
+
+---
+
 ## Danh sách tất cả Skills
 
 | Skill | Mô tả | Category |
@@ -98,12 +116,28 @@ youtube-channel-compare + youtube-scheduler → tối ưu lịch đăng
 
 ## Cách cài đặt
 
-### Bước 1 - Clone repo
+### Cài tất cả (nhanh nhất)
+
+```powershell
+# Windows
+git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && `
+Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\skills\
+```
+
+```bash
+# macOS / Linux
+git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && \
+cp -r openclaw-skills-mcbai/skills/*/* ~/.agents/skills/
+```
+
+### Cài từng skill riêng lẻ
+
+#### Bước 1 - Clone repo
 ```powershell
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 ```
 
-### Bước 2 - Copy skill vào OpenClaw
+#### Bước 2 - Copy skill vào OpenClaw
 ```powershell
 # Windows - ví dụ cài youtube-content-analyzer
 Copy-Item -Recurse openclaw-skills-mcbai\skills\youtube\youtube-content-analyzer $env:USERPROFILE\.agents\skills\
@@ -114,12 +148,12 @@ cp -r openclaw-skills-mcbai/skills/youtube/youtube-content-analyzer ~/.agents/sk
 
 > Skill nằm trong folder nào cũng được - chỉ cần copy đúng folder skill vào `~/.agents/skills/`
 
-### Bước 3 - Cài dependencies (nếu cần)
+#### Bước 3 - Cài dependencies (nếu cần)
 ```powershell
 powershell -ExecutionPolicy Bypass -File $env:USERPROFILE\.agents\skills\<tên-skill>\scripts\install.ps1
 ```
 
-### Bước 4 - Dùng ngay!
+#### Bước 4 - Dùng ngay!
 Mở chat với OpenClaw agent, gọi skill theo hướng dẫn trong README của từng skill.
 
 ---
@@ -169,5 +203,4 @@ Có skill hay muốn chia sẻ? Tạo Pull Request hoặc liên hệ qua Fanpage
 
 ---
 
-<p align="center">Made with ❤️ by <a href="https://www.mcbai.vn">MCB AI</a> &nbsp;·&nbsp; <a href="https://www.youtube.com/@mcbaivn">YouTube</a> &nbsp;·&nbsp; <a href="https://openclaw.mcbai.vn/openclaw101">Học OpenClaw 101 </a> &nbsp;·&nbsp; <a href="https://zalo.me/g/mmqkhi259">MCB AI Academy</a></p>
-
+<p align="center">Made with ❤️ by <a href="https://www.mcbai.vn">MCB AI</a> &nbsp;·&nbsp; <a href="https://www.youtube.com/@mcbaivn">YouTube</a> &nbsp;·&nbsp; <a href="https://openclaw.mcbai.vn/openclaw101">Học OpenClaw 101</a> &nbsp;·&nbsp; <a href="https://zalo.me/g/mmqkhi259">MCB AI Academy</a></p>
