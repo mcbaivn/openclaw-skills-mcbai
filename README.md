@@ -4,6 +4,8 @@
 
 > **Bộ sưu tập Skills mở rộng cho OpenClaw** - được tuyển chọn và phát triển bởi [MCB AI](https://www.mcbai.vn)
 
+> 🌍 **Phiên bản khác:** [🇺🇸 English Version](https://github.com/mcbaivn/openclaw-skills-mcbai-en)
+
 Tất cả skills đều plug-and-play: tải về, copy vào `~/.agents/skills/`, dùng ngay.
 Một skill có thể thuộc nhiều category.
 
@@ -168,3 +170,4 @@ Có skill hay muốn chia sẻ? Tạo Pull Request hoặc liên hệ qua Fanpage
 ---
 
 <p align="center">Made with ❤️ by <a href="https://www.mcbai.vn">MCB AI</a> &nbsp;·&nbsp; <a href="https://www.youtube.com/@mcbaivn">YouTube</a> &nbsp;·&nbsp; <a href="https://openclaw.mcbai.vn/openclaw101">Học OpenClaw 101 </a> &nbsp;·&nbsp; <a href="https://zalo.me/g/mmqkhi259">MCB AI Academy</a></p>
+
