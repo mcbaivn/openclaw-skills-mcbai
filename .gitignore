@@ -1,0 +1,35 @@
+# Data folders (large files, not needed in repo)
+Youtube_Master_Geting_Info/
+Checking-trending-youtube/
+content-research/
+content-writer/
+youtube-trending-skills/
+
+# SRT / subtitle data files
+*.srt
+*.vtt
+*.json
+*.txt
+*.webm
+*.mp4
+*.mp3
+
+# Memory files (private)
+memory/
+MEMORY.md
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Debug / temp files
+debug_check.txt
+summary.txt
+srt_clean.json
+srt_parsed.json
+srt_texts.txt
+subtitle_vi.srt
+
+# OpenClaw internal state
+.openclaw/
