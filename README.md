@@ -11,10 +11,23 @@ Một skill có thể thuộc nhiều category.
 
 ---
 
-## ⚡ Tải toàn bộ Skills về ngay
+## ⚡ Cài Skills nhanh
+
+### Cài từng skill (1 lệnh, không cần git)
+
+```bash
+npx clawhub@latest install youtube-content-analyzer
+npx clawhub@latest install youtube-channel-compare
+npx clawhub@latest install youtube-scheduler
+npx clawhub@latest install youtube-subtitle-extractor
+npx clawhub@latest install download-aio
+npx clawhub@latest install mcbai-subtitle-translator
+```
+
+### Cài tất cả cùng lúc (clone repo)
 
 ```powershell
-# Windows - tải và cài tất cả skills 1 lệnh
+# Windows
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && `
 Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\skills\
 ```
@@ -24,8 +37,6 @@ Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\ski
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && \
 cp -r openclaw-skills-mcbai/skills/*/* ~/.agents/skills/
 ```
-
-> Lệnh trên sẽ copy tất cả skills từ mọi category vào `~/.agents/skills/` một lần.
 
 ---
 
@@ -116,21 +127,20 @@ youtube-channel-compare + youtube-scheduler → tối ưu lịch đăng
 
 ## Cách cài đặt
 
-### Cài tất cả (nhanh nhất)
-
-```powershell
-# Windows
-git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && `
-Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\skills\
-```
+### Cài từng skill qua ClawhHub (dễ nhất)
 
 ```bash
-# macOS / Linux
-git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git && \
-cp -r openclaw-skills-mcbai/skills/*/* ~/.agents/skills/
+npx clawhub@latest install youtube-content-analyzer
+npx clawhub@latest install youtube-channel-compare
+npx clawhub@latest install youtube-scheduler
+npx clawhub@latest install youtube-subtitle-extractor
+npx clawhub@latest install download-aio
+npx clawhub@latest install mcbai-subtitle-translator
 ```
 
-### Cài từng skill riêng lẻ
+> Skills sẽ tự động tải vào `~/.agents/skills/` — không cần git, không cần biết cấu trúc repo.
+
+### Cài tất cả (clone repo)
 
 #### Bước 1 - Clone repo
 ```powershell
