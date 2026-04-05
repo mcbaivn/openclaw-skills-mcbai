@@ -1,5 +1,5 @@
 ---
-name: subtitle-translator
+name: subtitle-translator-mcbai
 description: Translate SRT subtitle files into any target language using AI. Processes subtitles in batches to handle large files efficiently, preserves exact SRT format and timing, and outputs a new translated SRT file. Use this skill when the user wants to translate subtitles, translate an SRT file, dịch phụ đề, dịch file srt, translate movie subtitles, or asks to convert subtitles to another language. Triggers on phrases like "dịch phụ đề", "translate subtitles", "dịch file srt", "translate srt", "dịch sang tiếng Việt", or when user uploads/pastes an SRT file and asks for translation.
 ---
 
@@ -125,3 +125,4 @@ Bạn có khỏe không?
 - JSON parse error từ AI: retry lô đó, nếu vẫn lỗi thì giữ nguyên text gốc và báo user
 - File SRT malformed: dùng `scripts/parse-srt.py` sẽ cố gắng recover, báo số dòng bị skip
 - Encoding: luôn đọc/ghi UTF-8
+

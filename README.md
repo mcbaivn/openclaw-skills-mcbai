@@ -21,7 +21,9 @@ npx clawhub@latest install youtube-channel-compare
 npx clawhub@latest install youtube-scheduler
 npx clawhub@latest install youtube-subtitle-extractor
 npx clawhub@latest install download-aio
-npx clawhub@latest install mcbai-subtitle-translator
+npx clawhub@latest install subtitle-translator-mcbai
+npx clawhub@latest install content-research-mcbai
+npx clawhub@latest install content-writer-mcbai
 ```
 
 ### Cài tất cả cùng lúc (clone repo)
@@ -135,7 +137,9 @@ npx clawhub@latest install youtube-channel-compare
 npx clawhub@latest install youtube-scheduler
 npx clawhub@latest install youtube-subtitle-extractor
 npx clawhub@latest install download-aio
-npx clawhub@latest install mcbai-subtitle-translator
+npx clawhub@latest install subtitle-translator-mcbai
+npx clawhub@latest install content-research-mcbai
+npx clawhub@latest install content-writer-mcbai
 ```
 
 > Skills sẽ tự động tải vào `~/.agents/skills/` — không cần git, không cần biết cấu trúc repo.
@@ -214,3 +218,4 @@ Có skill hay muốn chia sẻ? Tạo Pull Request hoặc liên hệ qua Fanpage
 ---
 
 <p align="center">Made with ❤️ by <a href="https://www.mcbai.vn">MCB AI</a> &nbsp;·&nbsp; <a href="https://www.youtube.com/@mcbaivn">YouTube</a> &nbsp;·&nbsp; <a href="https://openclaw.mcbai.vn/openclaw101">Học OpenClaw 101</a> &nbsp;·&nbsp; <a href="https://zalo.me/g/mmqkhi259">MCB AI Academy</a></p>
+

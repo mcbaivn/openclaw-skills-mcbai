@@ -188,3 +188,4 @@ Read `references/tone-presets.md` for full details:
 6. Emphasis = CAPS on 1-2 words max
 7. Lists = numbers or → arrows only
 8. Emoji = natural, platform-appropriate (not excessive on LinkedIn)
+
