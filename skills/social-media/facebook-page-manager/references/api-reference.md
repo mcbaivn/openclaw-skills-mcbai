@@ -74,4 +74,3 @@ Upload từng ảnh với `published=false` → lấy photo ID → gộp vào fe
 
 Skill dùng `v19.0`. Kiểm tra version mới nhất tại:
 https://developers.facebook.com/docs/graph-api/changelog
-

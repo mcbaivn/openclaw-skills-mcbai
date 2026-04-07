@@ -137,4 +137,3 @@ Facebook Graph API hỗ trợ đăng Story qua:
 - `/{page-id}/video_stories` (video)
 
 Story **không hỗ trợ hẹn giờ** qua API — đăng ngay lập tức.
-

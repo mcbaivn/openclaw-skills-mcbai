@@ -154,4 +154,3 @@ python fb_post.py delete-comment --comment-id COMMENT_ID
 - **Reels** phải từ 3-90 giây
 - **Comment/Reply** cần permission `pages_manage_engagement`
 - Nếu gặp lỗi permission, xem `references/get-token.md` phần Troubleshooting
-
