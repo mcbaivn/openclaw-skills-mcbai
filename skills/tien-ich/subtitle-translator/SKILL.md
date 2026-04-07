@@ -1,6 +1,6 @@
 ---
 name: subtitle-translator-mcbai
-description: Translate SRT subtitle files into any target language using AI. Processes subtitles in batches to handle large files efficiently, preserves exact SRT format and timing, and outputs a new translated SRT file. Use this skill when the user wants to translate subtitles, translate an SRT file, dịch phụ đề, dịch file srt, translate movie subtitles, or asks to convert subtitles to another language. Triggers on phrases like "dịch phụ đề", "translate subtitles", "dịch file srt", "translate srt", "dịch sang tiếng Việt", or when user uploads/pastes an SRT file and asks for translation.
+description: Dịch file phụ đề SRT sang bất kỳ ngôn ngữ nào bằng AI. Xử lý phụ đề theo lô để xử lý file lớn hiệu quả, giữ nguyên định dạng SRT và timing, xuất ra file SRT mới đã dịch. Dùng khi user muốn dịch phụ đề, dịch file SRT, dịch phụ đề phim, hoặc yêu cầu chuyển đổi phụ đề sang ngôn ngữ khác. Kích hoạt với "dịch phụ đề", "translate subtitles", "dịch file srt", "translate srt", "dịch sang tiếng Việt", hoặc khi user tải lên/paste file SRT và yêu cầu dịch.
 ---
 
 # 🌐 Subtitle Translator - MCB AI

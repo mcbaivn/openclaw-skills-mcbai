@@ -1,6 +1,6 @@
 ---
 name: content-writer
-description: Generate high-quality social media posts from research articles and source data. Supports multiple platforms (LinkedIn, Facebook, Twitter/X, TikTok caption, Threads), 6 content formats (Toplist, POV, Case Study, How-to, Story, Hook-List-CTA), multiple tones (default, bold, educational, storytelling, analytical, viral, empathetic, custom), 3 lengths (short/medium/long), and 2 languages (English/Vietnamese). Use this skill whenever the user wants to write a post, create social media content, draft content from research data, generate content in any format, or asks to "write a post", "viết bài", "tạo nội dung", "draft a post", "generate a post from this article", or any content writing from source material.
+description: Tạo bài đăng mạng xã hội chất lượng cao từ bài viết nghiên cứu và dữ liệu nguồn. Hỗ trợ nhiều nền tảng (LinkedIn, Facebook, Twitter/X, TikTok, Threads), 6 định dạng nội dung (Toplist, POV, Case Study, How-to, Story, Hook-List-CTA), nhiều tone giọng (mặc định, mạnh mẽ, giáo dục, kể chuyện, phân tích, viral, đồng cảm, tùy chỉnh), 3 độ dài (ngắn/vừa/dài), 2 ngôn ngữ (Anh/Việt). Dùng khi user muốn viết bài, tạo nội dung mạng xã hội, soạn content từ dữ liệu nghiên cứu, hoặc yêu cầu "viết bài", "tạo nội dung", "draft a post", "viết post từ bài này".
 ---
 
 # Content Writer Skill

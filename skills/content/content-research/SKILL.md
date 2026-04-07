@@ -1,6 +1,6 @@
 ---
 name: content-research
-description: Research and discover trending content sources for any topic using web search. Use this skill whenever the user wants to find articles, news, blog posts, or trending content about a specific topic for content creation, LinkedIn posts, social media writing, or content curation. Also trigger when the user mentions "research topic", "find articles about", "trending news", "content sources", "search for content", or wants to gather data/sources before writing posts.
+description: Tìm kiếm và khám phá nguồn nội dung trending cho bất kỳ chủ đề nào bằng web search. Dùng khi user muốn tìm bài viết, tin tức, blog, hoặc nội dung trending về một chủ đề cụ thể để tạo content, viết bài LinkedIn, mạng xã hội, hoặc tổng hợp nội dung. Kích hoạt khi user đề cập "research chủ đề", "tìm bài viết về", "tin tức trending", "nguồn nội dung", "tìm kiếm content", hoặc muốn thu thập dữ liệu/nguồn trước khi viết bài.
 ---
 
 # Content Research Skill
