@@ -21,7 +21,7 @@ npx clawhub@latest install download-aio
 npx clawhub@latest install subtitle-translator-mcbai
 npx clawhub@latest install content-research-mcbai
 npx clawhub@latest install content-writer-mcbai
-npx clawhub@latest install facebook-management-skills-by-mcbai
+npx clawhub@latest install mcbaivn-facebook-page-manager
 ```
 
 > Skills tự động tải vào `~/.agents/skills/` — không cần biết git hay cấu trúc repo.
@@ -54,7 +54,7 @@ Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\ski
 | [youtube-content-analyzer](skills/youtube/youtube-content-analyzer/) | Đọc SRT/TXT → tóm tắt, key points, tags, quotes | `npx clawhub@latest install youtube-content-analyzer` | 🎬 YouTube |
 | [youtube-channel-compare](skills/youtube/youtube-channel-compare/) | So sánh 2-5 kênh: views, engagement, trending score | `npx clawhub@latest install youtube-channel-compare` | 🎬 YouTube |
 | [youtube-scheduler](skills/youtube/youtube-scheduler/) | Tìm ngày/giờ vàng đăng video, heatmap ASCII | `npx clawhub@latest install youtube-scheduler` | 🎬 YouTube |
-| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng & quản lý nội dung Facebook Page tự động | `npx clawhub@latest install facebook-management-skills-by-mcbai` | 📱 Social Media |
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng & quản lý nội dung Facebook Page tự động | `npx clawhub@latest install mcbaivn-facebook-page-manager` | 📱 Social Media |
 
 > 🔄 Cập nhật thêm thường xuyên. **Star repo** để không bỏ lỡ!
 
@@ -114,7 +114,7 @@ youtube-channel-compare + youtube-scheduler → tối ưu lịch đăng
 
 | Skill | Mô tả | Cài đặt |
 |-------|-------|---------|
-| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng text/ảnh/video/Reels/Story, hẹn giờ, quản lý comment trên Facebook Page | `npx clawhub@latest install facebook-management-skills-by-mcbai` |
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng text/ảnh/video/Reels/Story, hẹn giờ, quản lý comment trên Facebook Page | `npx clawhub@latest install mcbaivn-facebook-page-manager` |
 
 ---
 
@@ -122,9 +122,9 @@ youtube-channel-compare + youtube-scheduler → tối ưu lịch đăng
 
 | Skill | Mô tả | Dùng khi nào | Cài đặt |
 |-------|-------|--------------|---------|
-| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng text/ảnh/video/Reels/Story lên Fanpage | Muốn đăng bài tự động lên Facebook Page | `npx clawhub@latest install facebook-management-skills-by-mcbai` |
-| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Hẹn giờ đăng bài (schedule) | Lên lịch content trước cả tuần | `npx clawhub@latest install facebook-management-skills-by-mcbai` |
-| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Quản lý comment & reply tự động | Muốn tương tác với khán giả qua API | `npx clawhub@latest install facebook-management-skills-by-mcbai` |
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng text/ảnh/video/Reels/Story lên Fanpage | Muốn đăng bài tự động lên Facebook Page | `npx clawhub@latest install mcbaivn-facebook-page-manager` |
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Hẹn giờ đăng bài (schedule) | Lên lịch content trước cả tuần | `npx clawhub@latest install mcbaivn-facebook-page-manager` |
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Quản lý comment & reply tự động | Muốn tương tác với khán giả qua API | `npx clawhub@latest install mcbaivn-facebook-page-manager` |
 
 **Pipeline gợi ý:**
 ```
