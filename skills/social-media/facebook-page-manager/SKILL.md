@@ -1,14 +1,6 @@
 ---
 name: facebook-page-manager
-description: >
-  Quản lý và đăng nội dung tự động lên Facebook Fanpage qua Graph API.
-  Hỗ trợ đầy đủ: post text/ảnh, carousel (nhiều ảnh), video, Reels, Story (ảnh/video),
-  hẹn giờ đăng bài (scheduled_publish_time), xem/sửa/xóa bài đã hẹn giờ,
-  comment vào bài viết, reply comment, xóa comment.
-  Dùng khi user yêu cầu "đăng bài lên Facebook Page", "hẹn giờ đăng Facebook",
-  "upload video lên Fanpage", "đăng story Facebook", "carousel Facebook",
-  "quản lý lịch đăng Facebook", "comment vào bài Facebook", "reply comment Facebook",
-  hoặc bất kỳ thao tác post/manage nội dung trên Facebook Page.
+description: Quản lý và đăng nội dung tự động lên Facebook Fanpage qua Graph API. Hỗ trợ đầy đủ: post text/ảnh, carousel (nhiều ảnh), video, Reels, Story (ảnh/video), hẹn giờ đăng bài, xem/sửa/xóa bài đã hẹn giờ, comment vào bài viết, reply comment, xóa comment. Dùng khi user yêu cầu "đăng bài lên Facebook Page", "hẹn giờ đăng Facebook", "upload video lên Fanpage", "đăng story Facebook", "carousel Facebook", "quản lý lịch đăng Facebook", "comment vào bài Facebook", hoặc bất kỳ thao tác post/manage nội dung trên Facebook Page.
 ---
 
 # Facebook Page Manager
