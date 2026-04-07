@@ -118,6 +118,21 @@ youtube-channel-compare + youtube-scheduler → tối ưu lịch đăng
 
 ---
 
+### 🔵 Facebook
+
+| Skill | Mô tả | Dùng khi nào | Cài đặt |
+|-------|-------|--------------|---------|
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng text/ảnh/video/Reels/Story lên Fanpage | Muốn đăng bài tự động lên Facebook Page | `npx clawhub@latest install facebook-management-skills-by-mcbai` |
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Hẹn giờ đăng bài (schedule) | Lên lịch content trước cả tuần | `npx clawhub@latest install facebook-management-skills-by-mcbai` |
+| [facebook-page-manager](skills/social-media/facebook-page-manager/) | Quản lý comment & reply tự động | Muốn tương tác với khán giả qua API | `npx clawhub@latest install facebook-management-skills-by-mcbai` |
+
+**Pipeline gợi ý:**
+```
+content-research → content-writer → facebook-page-manager (đăng + hẹn giờ)
+```
+
+---
+
 ## Cấu trúc repo
 
 ```
