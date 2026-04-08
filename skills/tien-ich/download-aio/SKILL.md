@@ -1,5 +1,6 @@
 ---
 name: download-aio
+clawhub_id: mcbaivn-download-aio
 description: Tải video, audio, playlist, phụ đề và thumbnail từ MỌI nền tảng (YouTube, TikTok, Instagram, Facebook, Twitter/X, Twitch, Vimeo, SoundCloud, Reddit và 1000+ nền tảng khác) bằng yt-dlp. Sau khi tải, tự động gửi file về Telegram nếu dưới 50MB. Dùng khi user muốn tải video, audio, playlist, reel, short, clip, phụ đề hoặc thumbnail từ bất kỳ website hay nền tảng mạng xã hội nào. Kích hoạt với "tải video", "download video", "tải nhạc", "download audio", "tải playlist", "lưu video", hoặc khi user paste URL từ nền tảng video.
 ---
 
@@ -10,7 +11,7 @@ Tải video, audio, playlist, subtitle, thumbnail từ 1000+ nền tảng. Tự 
 ## Cài đặt
 
 ```bash
-npx clawhub@latest install download-aio
+npx clawhub@latest install mcbaivn-download-aio
 ```
 
 > Sau khi cài, chạy script setup dependencies lần đầu:

@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-content-research",
+  "clawhub_id": "mcbaivn-content-research",
+  "version": "1.0.0",
+  "description": "Search and discover trending content sources for any topic using dual web search (Brave + Tavily). Powers MCB AI content pipeline.",
+  "description_vi": "Tìm kiếm và khám phá nguồn nội dung trending cho bất kỳ chủ đề nào bằng Brave + Tavily song song. Nền tảng cho pipeline content MCB AI.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["content","research","search","brave","tavily","trending","linkedin"],
+  "category": "content",
+  "install_cmd": "npx clawhub@latest install mcbaivn-content-research",
+  "repository": "https://clawhub.com/skills/mcbaivn-content-research"
+}

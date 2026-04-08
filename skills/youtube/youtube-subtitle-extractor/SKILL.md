@@ -1,5 +1,6 @@
 ---
 name: youtube-subtitle-extractor
+clawhub_id: mcbaivn-youtube-subtitle-extractor
 description: Tải phụ đề (SRT/VTT/TXT) từ video YouTube bằng yt-dlp. Hỗ trợ auto-generated và manual subtitles, đa ngôn ngữ. Dùng khi user yêu cầu "Tải phụ đề video X", "Get subtitles from [URL]", "Extract SRT from @Channel", hoặc cần file phụ đề để phân tích nội dung.
 ---
 

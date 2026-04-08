@@ -1,5 +1,6 @@
 ---
 name: youtube-scheduler
+clawhub_id: mcbaivn-youtube-scheduler
 description: Phân tích lịch đăng video của kênh YouTube để tìm "khung giờ vàng" — thời điểm đăng có nhiều view và engagement nhất. Dùng khi user yêu cầu "Tìm giờ vàng đăng video @Channel", "Best time to post for @Channel", "Kênh này hay đăng lúc mấy giờ", hoặc muốn tối ưu lịch đăng nội dung.
 ---
 

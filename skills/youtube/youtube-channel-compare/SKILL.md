@@ -1,5 +1,6 @@
 ---
 name: youtube-channel-compare
+clawhub_id: mcbaivn-youtube-channel-compare
 description: So sánh 2-5 kênh YouTube theo views, engagement rate, trending score và tần suất đăng bài. Dùng khi user hỏi "So sánh @KênhA vs @KênhB", "Kênh nào mạnh hơn trong niche X", hoặc cần dữ liệu phân tích cạnh tranh.
 ---
 

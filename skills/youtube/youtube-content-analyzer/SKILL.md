@@ -1,5 +1,6 @@
 ---
 name: youtube-content-analyzer
+clawhub_id: mcbaivn-youtube-content-analyzer
 description: Phân tích nội dung video YouTube từ file SRT/VTT/TXT hoặc URL trực tiếp. Tóm tắt nội dung, extract key points, phân tích chủ đề chính, tạo báo cáo. Dùng khi user yêu cầu "Tóm tắt video X", "Analyze content từ SRT", "Key points từ [URL]", "Đọc nội dung video mà không cần xem", hoặc cần hiểu nhanh nội dung hàng loạt video.
 ---
 
