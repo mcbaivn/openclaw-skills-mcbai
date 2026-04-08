@@ -6,14 +6,22 @@ description: Tải phụ đề (SRT/VTT/TXT) từ video YouTube bằng yt-dlp. H
 
 # 📥 YouTube Subtitle Extractor
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
+
 Tải phụ đề từ video hoặc kênh YouTube, xuất ra file `.srt` sạch.
 
 ## Cài đặt
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
+
 ### Cách 1 — Tải skill thẳng từ GitHub (khuyến nghị)
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
 
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
 $skillDir = "$env:USERPROFILE\.agents\skills\youtube-subtitle-extractor"
 New-Item -ItemType Directory -Force "$skillDir\scripts" | Out-Null
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-subtitle-extractor/SKILL.md" -OutFile "$skillDir\SKILL.md"
@@ -22,6 +30,8 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skill
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
 mkdir -p ~/.agents/skills/youtube-subtitle-extractor/scripts
 curl -o ~/.agents/skills/youtube-subtitle-extractor/SKILL.md \
   https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-subtitle-extractor/SKILL.md
@@ -31,19 +41,27 @@ curl -o ~/.agents/skills/youtube-subtitle-extractor/scripts/extract_subtitles.py
 
 ### Cách 2 — Clone toàn bộ repo
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
+
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 Copy-Item -Recurse openclaw-skills-mcbai\skills\youtube\youtube-subtitle-extractor $env:USERPROFILE\.agents\skills\
 ```
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 cp -r openclaw-skills-mcbai/skills/youtube/youtube-subtitle-extractor ~/.agents/skills/
 ```
 
 ## Sử dụng
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
 
 ```
 python scripts/extract_subtitles.py <video_or_channel_url> [--lang vi,en] [--format srt] [--auto]
@@ -56,6 +74,8 @@ python scripts/extract_subtitles.py <video_or_channel_url> [--lang vi,en] [--for
 
 ## Output
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
+
 ```
 Youtube_Subtitles/
 └── [Video_Title]/
@@ -65,6 +85,8 @@ Youtube_Subtitles/
 ```
 
 ## Lưu ý
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-subtitle-extractor`
 - Ưu tiên manual subtitles trước, fallback sang auto-generated nếu không có.
 - File `_plain.txt` dùng để đưa vào `youtube-content-analyzer`.
 - Nếu URL là kênh, tải phụ đề tất cả video trong kênh (giới hạn với `--limit N`).

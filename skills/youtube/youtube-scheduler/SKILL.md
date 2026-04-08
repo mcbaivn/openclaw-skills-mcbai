@@ -6,14 +6,22 @@ description: Phân tích lịch đăng video của kênh YouTube để tìm "khu
 
 # ⏰ YouTube Scheduler Analyzer
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
+
 Phân tích lịch đăng của kênh → tìm ngày và giờ có hiệu suất cao nhất.
 
 ## Cài đặt
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
+
 ### Cách 1 — Tải skill thẳng từ GitHub (khuyến nghị)
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 $skillDir = "$env:USERPROFILE\.agents\skills\youtube-scheduler"
 New-Item -ItemType Directory -Force "$skillDir\scripts" | Out-Null
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-scheduler/SKILL.md" -OutFile "$skillDir\SKILL.md"
@@ -22,6 +30,8 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skill
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 mkdir -p ~/.agents/skills/youtube-scheduler/scripts
 curl -o ~/.agents/skills/youtube-scheduler/SKILL.md \
   https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-scheduler/SKILL.md
@@ -31,19 +41,27 @@ curl -o ~/.agents/skills/youtube-scheduler/scripts/analyze_schedule.py \
 
 ### Cách 2 — Clone toàn bộ repo
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
+
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 Copy-Item -Recurse openclaw-skills-mcbai\skills\youtube\youtube-scheduler $env:USERPROFILE\.agents\skills\
 ```
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 cp -r openclaw-skills-mcbai/skills/youtube/youtube-scheduler ~/.agents/skills/
 ```
 
 ## Sử dụng
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 
 ```
 python scripts/analyze_schedule.py <channel_url> [--limit N] [--tz Asia/Ho_Chi_Minh]
@@ -54,6 +72,8 @@ python scripts/analyze_schedule.py <channel_url> [--limit N] [--tz Asia/Ho_Chi_M
 - Đổi timezone → thêm `--tz Asia/Ho_Chi_Minh` (mặc định UTC)
 
 ## Output
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 
 ```
 Youtube_Schedule/
@@ -68,6 +88,8 @@ Youtube_Schedule/
 - 💡 Khuyến nghị lịch đăng tối ưu
 
 ## Lưu ý
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-scheduler`
 - Phân tích dựa trên `--limit` video gần nhất (khuyến nghị 30-100 video).
 - Mặc định timezone UTC, dùng `--tz` để chuyển sang giờ địa phương.
 - Kết quả là ước tính thống kê từ dữ liệu lịch sử, không phải đảm bảo tuyệt đối.

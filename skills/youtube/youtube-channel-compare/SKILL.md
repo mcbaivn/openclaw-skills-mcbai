@@ -6,14 +6,22 @@ description: So sánh 2-5 kênh YouTube theo views, engagement rate, trending sc
 
 # 📊 YouTube Channel Compare
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
+
 So sánh hiệu suất của nhiều kênh YouTube và tạo báo cáo benchmark.
 
 ## Cài đặt
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
+
 ### Cách 1 — Tải skill thẳng từ GitHub (khuyến nghị)
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 $skillDir = "$env:USERPROFILE\.agents\skills\youtube-channel-compare"
 New-Item -ItemType Directory -Force "$skillDir\scripts" | Out-Null
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-channel-compare/SKILL.md" -OutFile "$skillDir\SKILL.md"
@@ -22,6 +30,8 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skill
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 mkdir -p ~/.agents/skills/youtube-channel-compare/scripts
 curl -o ~/.agents/skills/youtube-channel-compare/SKILL.md \
   https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-channel-compare/SKILL.md
@@ -31,19 +41,27 @@ curl -o ~/.agents/skills/youtube-channel-compare/scripts/compare_channels.py \
 
 ### Cách 2 — Clone toàn bộ repo
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
+
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 Copy-Item -Recurse openclaw-skills-mcbai\skills\youtube\youtube-channel-compare $env:USERPROFILE\.agents\skills\
 ```
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 cp -r openclaw-skills-mcbai/skills/youtube/youtube-channel-compare ~/.agents/skills/
 ```
 
 ## Sử dụng
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 
 ```
 python scripts/compare_channels.py <url1> <url2> [url3...] [--limit N]
@@ -53,6 +71,8 @@ python scripts/compare_channels.py <url1> <url2> [url3...] [--limit N]
 - `So sánh @MrBeast vs @PewDiePie` → `python scripts/compare_channels.py https://youtube.com/@MrBeast https://youtube.com/@PewDiePie --limit 20`
 
 ## Output
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 
 ```
 Youtube_Compare/
@@ -73,5 +93,7 @@ Youtube_Compare/
 **Trending Score**: `(Views × 0.6) + (Likes × 0.3) + (Comments × 0.1)` chuẩn hóa 1-100
 
 ## Lưu ý
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-channel-compare`
 - Mặc định lấy 20 video gần nhất mỗi kênh (dùng `--limit` để thay đổi).
 - Kênh không có stats công khai sẽ hiển thị N/A.

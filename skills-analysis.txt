@@ -1,0 +1,787 @@
+============================================================
+SKILL: youtube-content-analyzer
+============================================================
+
+--- SKILL.md ---
+---
+name: youtube-content-analyzer
+description: Phân tích nội dung video YouTube từ file SRT/VTT/TXT hoặc URL trực tiếp. Tóm tắt nội dung, extract key points, phân tích chủ đề chính, tạo báo cáo. Dùng khi user yêu cầu "Tóm tắt video X", "Analyze content từ SRT", "Key points từ [URL]", "Đọc nội dung video mà không cần xem", hoặc cần hiểu nhanh nội dung hàng loạt video.
+---
+
+# 🤖 YouTube Content Analyzer
+
+Đọc phụ đề → tóm tắt nội dung, key points, phân tích chủ đề. Không cần xem video.
+
+## Workflow
+
+**Cách 1 — Từ file SRT/TXT có sẵn:**
+```
+python scripts/analyze_content.py --file path/to/subtitle.srt
+```
+
+**Cách 2 — Từ URL (tự tải subtitle rồi phân tích):**
+```
+python scripts/analyze_content.py --url https://youtu.be/xxxx [--lang vi]
+```
+
+**Cách 3 — Phân tích hàng loạt:**
+```
+python scripts/analyze_content.py --folder Youtube_Subtitles/ChannelName/
+```
+
+## Output
+
+```
+Youtube_Analysis/
+└── [Channel]/
+    └── [Video_Title]_analysis_DD_MM_YYYY.txt
+```
+
+**Mỗi file analysis gồm:**
+- 📌 **Tóm tắt** (3-5 câu)
+- 🔑 **Key Points** (bullet list)
+- 🏷️ **Chủ đề chính** (tags)
+- 💬 **Quotes đáng chú ý**
+- 📊 **Thống kê**: độ dài, ngôn ngữ, mật độ thông tin
+
+## Lưu ý
+- Với video dài (>30 phút), script chia nhỏ thành chunks trước khi phân tích.
+- Kết hợp với `youtube-subtitle-extractor` để pipeline đầy đủ.
+- Xem `references/analysis-prompt.md` để tùy chỉnh prompt phân tích.
+
+
+--- scripts/analyze_content.py ---
+#!/usr/bin/env python3
+"""
+YouTube Content Analyzer
+Phân tích nội dung từ file SRT/TXT hoặc URL YouTube
+Usage: python analyze_content.py --file <path> | --url <url> | --folder <dir>
+"""
+
+import argparse
+import os
+import re
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+
+# Thư mục output
+OUTPUT_DIR = "Youtube_Analysis"
+
+def parse_srt(path):
+    """Đọc file SRT/TXT và trả về text thuần"""
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        content = f.read()
+    if path.endswith(".srt") or path.endswith(".vtt"):
+        content = re.sub(r'^\d+\s*\n', '', content, flags=re.MULTILINE)
+        content = re.sub(r'\d{2}:\d{2}:\d{2}[,\.]\d{3} --> \d{2}:\d{2}:\d{2}[,\.]\d{3}\n', '', content)
+        content = re.sub(r'<[^>]+>', '', content)
+        content = re.sub(r'\n{3,}', '\n\n', content)
+    return content.strip()
+
+def chunk_text(text, max_chars=8000):
+    """Chia text thành chunks nhỏ"""
+    words = text.split()
+    chunks, current = [], []
+    count = 0
+    for word in words:
+        current.append(word)
+        count += len(word) + 1
+        if count >= max_chars:
+            chunks.append(" ".join(current))
+            current, count = [], 0
+    if current:
+        chunks.append(" ".join(current))
+    return chunks
+
+def analyze_text(text, title="Video"):
+    """Tạo báo cáo phân tích từ plain text"""
+    chunks = chunk_text(text)
+    word_count = len(text.split())
+    char_count = len(text)
+    
+    # Thống kê cơ bản
+    stats = f"📊 Thống kê: {word_count} từ | {char_count} ký tự | {len(chunks)} phần"
+    
+    # Ghi report (agent sẽ điền phần AI analysis)
+    report = f"""# 📹 Phân tích: {title}
+📅 {datetime.now().strftime('%d/%m/%Y %H:%M')}
+{stats}
+
+---
+
+## 📌 Tóm tắt
+[Agent sẽ tóm tắt nội dung dưới đây]
+
+## 🔑 Key Points
+[Agent sẽ liệt kê các điểm chính]
+
+## 🏷️ Chủ đề chính
+[Agent sẽ gắn tag chủ đề]
+
+## 💬 Quotes đáng chú ý
+[Agent sẽ trích dẫn câu quan trọng]
+
+---
+
+## 📄 Nội dung gốc (để phân tích)
+{text[:12000]}{'...[truncated]' if len(text) > 12000 else ''}
+"""
+    return report
+
+def process_file(path, out_dir):
+    title = Path(path).stem
+    text = parse_srt(path)
+    report = analyze_text(text, title)
+    
+    os.makedirs(out_dir, exist_ok=True)
+    date_str = datetime.now().strftime('%d_%m_%Y')
+    out_path = os.path.join(out_dir, f"{title}_analysis_{date_str}.txt")
+    
+    # Không ghi đè
+    if os.path.exists(out_path):
+        i = 1
+        while os.path.exists(out_path.replace('.txt', f'_{i}.txt')):
+            i += 1
+        out_path = out_path.replace('.txt', f'_{i}.txt')
+    
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(report)
+    
+    print(f"[✓] Report: {out_path}")
+    return out_path, text
+
+def download_and_analyze(url, lang="vi,en", out_dir=OUTPUT_DIR):
+    """Tải subtitle từ URL rồi phân tích"""
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmpdir:
+        cmd = [
+            "yt-dlp", "--skip-download",
+            "--write-subs", "--write-auto-subs",
+            "--sub-langs", lang,
+            "--convert-subs", "srt",
+            "-o", os.path.join(tmpdir, "%(title)s.%(lang)s.%(ext)s"),
+            url
+        ]
+        subprocess.run(cmd, check=False)
+        
+        srt_files = list(Path(tmpdir).glob("*.srt"))
+        if not srt_files:
+            print("[!] Không tìm thấy phụ đề. Thử --lang en hoặc --auto")
+            return
+        
+        for f in srt_files:
+            process_file(str(f), out_dir)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="YouTube Content Analyzer")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--file", help="Path đến file SRT/VTT/TXT")
+    group.add_argument("--url", help="URL YouTube video")
+    group.add_argument("--folder", help="Thư mục chứa nhiều file SRT/TXT")
+    parser.add_argument("--lang", default="vi,en", help="Ngôn ngữ phụ đề khi dùng --url")
+    parser.add_argument("--out", default=OUTPUT_DIR, help="Thư mục output")
+    args = parser.parse_args()
+
+    if args.file:
+        process_file(args.file, args.out)
+    elif args.url:
+        download_and_analyze(args.url, args.lang, args.out)
+    elif args.folder:
+        files = list(Path(args.folder).rglob("*.srt")) + list(Path(args.folder).rglob("*_plain.txt"))
+        if not files:
+            print(f"[!] Không tìm thấy file SRT/TXT trong: {args.folder}")
+            sys.exit(1)
+        for f in files:
+            process_file(str(f), args.out)
+        print(f"\n[✓] Phân tích xong {len(files)} file!")
+
+
+--- references/analysis-prompt.md ---
+# Analysis Prompt Guide
+
+Khi agent đọc file analysis output, điền vào các phần như sau:
+
+## Tóm tắt
+Viết 3-5 câu mô tả nội dung chính của video. Tập trung vào: chủ đề, thông điệp chính, kết luận.
+
+## Key Points
+Liệt kê 5-10 điểm quan trọng nhất dạng bullet. Mỗi điểm 1 câu ngắn gọn.
+
+## Chủ đề chính
+Gắn 3-7 tags ngắn, ví dụ: #marketing #kinh-doanh #growth-hack
+
+## Quotes đáng chú ý
+Trích dẫn nguyên văn 2-3 câu có giá trị cao từ nội dung gốc.
+
+## Đánh giá mật độ thông tin
+- **Cao**: Video đặc thông tin, ít lặp, phù hợp nghiên cứu sâu
+- **Trung bình**: Cân bằng giữa ví dụ và kiến thức
+- **Thấp**: Nhiều filler, phù hợp nghe giải trí
+
+
+
+============================================================
+SKILL: youtube-channel-compare
+============================================================
+
+--- SKILL.md ---
+---
+name: youtube-channel-compare
+description: So sánh 2-5 kênh YouTube cùng niche: trending score, tần suất đăng, engagement rate, views trung bình, likes/comments ratio. Xuất bảng so sánh và báo cáo đánh giá. Dùng khi user yêu cầu "So sánh kênh A vs B", "Compare @ChannelA @ChannelB", "Kênh nào tốt hơn", hoặc muốn benchmark kênh đối thủ.
+---
+
+# 📊 YouTube Channel Compare
+
+So sánh hiệu suất nhiều kênh YouTube, xuất báo cáo benchmark.
+
+## Cách dùng
+
+```
+python scripts/compare_channels.py <url1> <url2> [url3...] [--limit N]
+```
+
+**Ví dụ:**
+- `So sánh @MrBeast vs @PewDiePie` → `python scripts/compare_channels.py https://youtube.com/@MrBeast https://youtube.com/@PewDiePie --limit 20`
+
+## Output
+
+```
+Youtube_Compare/
+└── compare_[Chan1]_vs_[Chan2]_DD_MM_YYYY.txt
+```
+
+**Báo cáo gồm:**
+
+| Metric | Kênh A | Kênh B |
+|--------|--------|--------|
+| Views TB | ... | ... |
+| Likes TB | ... | ... |
+| Comments TB | ... | ... |
+| Trending Score TB | ... | ... |
+| Tần suất đăng | ... | ... |
+| Engagement Rate | ... | ... |
+
+**Trending Score**: `(Views × 0.6) + (Likes × 0.3) + (Comments × 0.1)` chuẩn hóa 1-100
+
+## Lưu ý
+- Mặc định lấy 20 video gần nhất mỗi kênh (`--limit`).
+- Kênh nào không public stats sẽ hiển thị N/A.
+
+
+--- scripts/compare_channels.py ---
+#!/usr/bin/env python3
+"""
+YouTube Channel Compare
+So sánh metrics của nhiều kênh YouTube
+Usage: python compare_channels.py <url1> <url2> [...] [--limit N]
+"""
+
+import subprocess
+import json
+import sys
+import os
+import re
+import argparse
+from datetime import datetime
+from collections import defaultdict
+
+OUTPUT_DIR = "Youtube_Compare"
+
+def fetch_channel_data(url, limit=20):
+    """Lấy metadata video từ kênh"""
+    cmd = [
+        "yt-dlp",
+        "--flat-playlist",
+        "--playlist-end", str(limit),
+        "--print", '{"title":"%(title)s","url":"%(url)s","view_count":%(view_count)s,"like_count":%(like_count)s,"comment_count":%(comment_count)s,"upload_date":"%(upload_date)s","channel":"%(channel)s"}',
+        url
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    videos = []
+    for line in result.stdout.strip().split('\n'):
+        if not line.strip():
+            continue
+        try:
+            v = json.loads(line)
+            videos.append(v)
+        except json.JSONDecodeError:
+            continue
+    return videos
+
+def safe_num(val):
+    try:
+        return float(val) if val not in (None, "None", "NA", "N/A") else 0
+    except:
+        return 0
+
+def trending_score(v, max_views=1, max_likes=1, max_comments=1):
+    views = safe_num(v.get("view_count", 0))
+    likes = safe_num(v.get("like_count", 0))
+    comments = safe_num(v.get("comment_count", 0))
+    raw = (views / max_views * 0.6) + (likes / max_likes * 0.3) + (comments / max_comments * 0.1)
+    return round(raw * 100, 2)
+
+def analyze_channel(videos):
+    if not videos:
+        return {}
+    
+    views = [safe_num(v.get("view_count", 0)) for v in videos]
+    likes = [safe_num(v.get("like_count", 0)) for v in videos]
+    comments = [safe_num(v.get("comment_count", 0)) for v in videos]
+    
+    max_v, max_l, max_c = max(views) or 1, max(likes) or 1, max(comments) or 1
+    scores = [trending_score(v, max_v, max_l, max_c) for v in videos]
+    
+    # Tần suất đăng (ngày/video)
+    dates = sorted([v.get("upload_date","") for v in videos if v.get("upload_date")])
+    freq = "N/A"
+    if len(dates) >= 2:
+        try:
+            d1 = datetime.strptime(dates[0], "%Y%m%d")
+            d2 = datetime.strptime(dates[-1], "%Y%m%d")
+            days_span = abs((d2 - d1).days) or 1
+            freq = f"{days_span / len(dates):.1f} ngày/video"
+        except:
+            pass
+    
+    avg_views = sum(views) / len(views)
+    avg_likes = sum(likes) / len(likes)
+    avg_comments = sum(comments) / len(comments)
+    engagement = (avg_likes + avg_comments) / avg_views * 100 if avg_views > 0 else 0
+    
+    return {
+        "channel": videos[0].get("channel", "Unknown"),
+        "video_count": len(videos),
+        "avg_views": round(avg_views),
+        "avg_likes": round(avg_likes),
+        "avg_comments": round(avg_comments),
+        "avg_trending_score": round(sum(scores) / len(scores), 2),
+        "engagement_rate": round(engagement, 3),
+        "post_frequency": freq,
+        "top_video": max(videos, key=lambda v: safe_num(v.get("view_count", 0))).get("title", "N/A")
+    }
+
+def format_num(n):
+    if n >= 1_000_000:
+        return f"{n/1_000_000:.1f}M"
+    elif n >= 1_000:
+        return f"{n/1_000:.1f}K"
+    return str(n)
+
+def generate_report(channels_data):
+    lines = [f"# 📊 YouTube Channel Compare Report"]
+    lines.append(f"📅 {datetime.now().strftime('%d/%m/%Y %H:%M')}\n")
+    lines.append(f"{'Metric':<25} " + " | ".join(f"{d['channel'][:20]:<20}" for d in channels_data))
+    lines.append("-" * (25 + 23 * len(channels_data)))
+    
+    metrics = [
+        ("Views TB", "avg_views", format_num),
+        ("Likes TB", "avg_likes", format_num),
+        ("Comments TB", "avg_comments", format_num),
+        ("Trending Score TB", "avg_trending_score", str),
+        ("Engagement Rate", "engagement_rate", lambda x: f"{x}%"),
+        ("Tần suất đăng", "post_frequency", str),
+        ("Video phân tích", "video_count", str),
+    ]
+    
+    for label, key, fmt in metrics:
+        row = f"{label:<25} " + " | ".join(f"{fmt(d.get(key,'N/A')):<20}" for d in channels_data)
+        lines.append(row)
+    
+    lines.append("\n## 🏆 Video nổi bật nhất")
+    for d in channels_data:
+        lines.append(f"- **{d['channel']}**: {d.get('top_video','N/A')}")
+    
+    lines.append("\n## 🔍 Nhận xét")
+    best_views = max(channels_data, key=lambda x: x.get("avg_views", 0))
+    best_engage = max(channels_data, key=lambda x: x.get("engagement_rate", 0))
+    lines.append(f"- 👑 Views cao nhất: **{best_views['channel']}** ({format_num(best_views['avg_views'])} TB)")
+    lines.append(f"- 💬 Engagement tốt nhất: **{best_engage['channel']}** ({best_engage['engagement_rate']}%)")
+    
+    return "\n".join(lines)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="YouTube Channel Compare")
+    parser.add_argument("urls", nargs="+", help="URLs kênh YouTube (2-5 kênh)")
+    parser.add_argument("--limit", type=int, default=20, help="Số video mỗi kênh (mặc định: 20)")
+    args = parser.parse_args()
+
+    if len(args.urls) < 2:
+        print("[!] Cần ít nhất 2 kênh để so sánh")
+        sys.exit(1)
+
+    all_data = []
+    for url in args.urls:
+        print(f"[*] Đang lấy dữ liệu: {url}")
+        videos = fetch_channel_data(url, args.limit)
+        if not videos:
+            print(f"[!] Không lấy được dữ liệu từ: {url}")
+            continue
+        data = analyze_channel(videos)
+        all_data.append(data)
+        print(f"[+] {data['channel']}: {data['video_count']} video")
+
+    if len(all_data) < 2:
+        print("[!] Không đủ dữ liệu để so sánh")
+        sys.exit(1)
+
+    report = generate_report(all_data)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    
+    names = "_vs_".join(re.sub(r'[^a-zA-Z0-9]', '', d['channel'])[:10] for d in all_data)
+    date_str = datetime.now().strftime('%d_%m_%Y')
+    out_path = os.path.join(OUTPUT_DIR, f"compare_{names}_{date_str}.txt")
+    
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(report)
+    
+    print(f"\n{report}")
+    print(f"\n[✓] Báo cáo lưu tại: {out_path}")
+
+
+
+============================================================
+SKILL: youtube-scheduler
+============================================================
+
+--- SKILL.md ---
+---
+name: youtube-scheduler
+description: Phân tích lịch đăng video của kênh YouTube để tìm "khung giờ vàng" — thời điểm đăng có nhiều view và engagement nhất. Dùng khi user yêu cầu "Tìm giờ vàng đăng video @Channel", "Best time to post for @Channel", "Kênh này hay đăng lúc mấy giờ", hoặc muốn tối ưu lịch đăng nội dung.
+---
+
+# ⏰ YouTube Scheduler Analyzer
+
+Phân tích lịch đăng video của kênh → tìm khung giờ và ngày có hiệu suất cao nhất.
+
+## Cách dùng
+
+```
+python scripts/analyze_schedule.py <channel_url> [--limit N] [--tz Asia/Ho_Chi_Minh]
+```
+
+**Ví dụ:**
+- `Tìm giờ vàng @MrBeast` → `python scripts/analyze_schedule.py https://youtube.com/@MrBeast --limit 50`
+- Đổi timezone → `--tz Asia/Ho_Chi_Minh` (mặc định UTC)
+
+## Output
+
+```
+Youtube_Schedule/
+└── [Channel]_schedule_DD_MM_YYYY.txt
+```
+
+**Báo cáo gồm:**
+- 📅 Ngày trong tuần tốt nhất (sắp xếp theo views TB)
+- ⏰ Khung giờ vàng (0-23h, theo views TB)
+- 📈 Heatmap ngày × giờ (ASCII)
+- 🏆 Top 5 video có view cao nhất kèm ngày/giờ đăng
+- 💡 Khuyến nghị lịch đăng tối ưu
+
+## Lưu ý
+- Phân tích dựa trên `--limit` video gần nhất (khuyến nghị 30-100 video).
+- Timezone mặc định UTC; dùng `--tz` để chuyển sang giờ địa phương.
+- Kết quả chỉ mang tính thống kê từ lịch sử, không đảm bảo tuyệt đối.
+
+
+--- scripts/analyze_schedule.py ---
+#!/usr/bin/env python3
+"""
+YouTube Scheduler Analyzer
+Tìm khung giờ vàng đăng video từ lịch sử kênh
+Usage: python analyze_schedule.py <channel_url> [--limit N] [--tz timezone]
+"""
+
+import subprocess
+import json
+import sys
+import os
+import re
+import argparse
+from datetime import datetime, timezone
+from collections import defaultdict
+
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    ZoneInfo = None
+
+OUTPUT_DIR = "Youtube_Schedule"
+
+def fetch_video_schedule(url, limit=50):
+    """Lấy thông tin upload_date và stats từ kênh"""
+    cmd = [
+        "yt-dlp",
+        "--flat-playlist",
+        "--playlist-end", str(limit),
+        "--print", '{"title":"%(title)s","view_count":%(view_count)s,"like_count":%(like_count)s,"upload_date":"%(upload_date)s","timestamp":%(timestamp)s,"channel":"%(channel)s"}',
+        url
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    videos = []
+    for line in result.stdout.strip().split('\n'):
+        if not line.strip():
+            continue
+        try:
+            v = json.loads(line)
+            videos.append(v)
+        except:
+            continue
+    return videos
+
+def safe_num(val):
+    try:
+        return float(val) if val not in (None, "None", "NA") else 0
+    except:
+        return 0
+
+def to_local(ts, tz_name):
+    """Chuyển timestamp sang giờ local"""
+    try:
+        ts = int(ts)
+        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
+        if tz_name and ZoneInfo:
+            dt = dt.astimezone(ZoneInfo(tz_name))
+        return dt
+    except:
+        return None
+
+DAY_NAMES = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"]
+
+def analyze(videos, tz_name):
+    by_hour = defaultdict(list)   # hour -> [views]
+    by_day = defaultdict(list)    # weekday -> [views]
+    heatmap = defaultdict(list)   # (day, hour) -> [views]
+    top_videos = []
+
+    for v in videos:
+        ts = v.get("timestamp")
+        views = safe_num(v.get("view_count", 0))
+        if not ts or ts in (None, "None"):
+            continue
+        dt = to_local(ts, tz_name)
+        if not dt:
+            continue
+        h = dt.hour
+        d = dt.weekday()
+        by_hour[h].append(views)
+        by_day[d].append(views)
+        heatmap[(d, h)].append(views)
+        top_videos.append((views, dt.strftime('%d/%m/%Y %H:%M'), v.get("title","?")))
+
+    return by_hour, by_day, heatmap, sorted(top_videos, reverse=True)[:5]
+
+def avg(lst):
+    return sum(lst) / len(lst) if lst else 0
+
+def build_report(channel, videos, tz_name):
+    by_hour, by_day, heatmap, top5 = analyze(videos, tz_name)
+
+    lines = [f"# ⏰ YouTube Schedule Report: {channel}"]
+    lines.append(f"📅 {datetime.now().strftime('%d/%m/%Y %H:%M')} | Timezone: {tz_name or 'UTC'}")
+    lines.append(f"📊 Phân tích từ {len(videos)} video\n")
+
+    # Top ngày
+    lines.append("## 📅 Ngày đăng tốt nhất (theo views TB)")
+    sorted_days = sorted(by_day.items(), key=lambda x: avg(x[1]), reverse=True)
+    for d, views_list in sorted_days:
+        bar = "█" * min(int(avg(views_list) / max(avg(v) for _, v in sorted_days) * 20), 20)
+        lines.append(f"  {DAY_NAMES[d]:<10} {bar:<20} {avg(views_list):,.0f} views TB ({len(views_list)} video)")
+
+    # Top giờ
+    lines.append("\n## ⏰ Khung giờ vàng (theo views TB)")
+    sorted_hours = sorted(by_hour.items(), key=lambda x: avg(x[1]), reverse=True)[:8]
+    for h, views_list in sorted_hours:
+        bar = "█" * min(int(avg(views_list) / avg(sorted_hours[0][1]) * 15), 15)
+        lines.append(f"  {h:02d}:00-{h+1:02d}:00  {bar:<15} {avg(views_list):,.0f} views TB")
+
+    # Heatmap ASCII (simplified)
+    lines.append("\n## 🗓️ Heatmap (ngày × khung giờ sáng/chiều/tối)")
+    lines.append("         Sáng(6-12)  Chiều(12-18)  Tối(18-24)  Đêm(0-6)")
+    for d in range(7):
+        morning = avg(sum([heatmap[(d,h)] for h in range(6,12)], []))
+        afternoon = avg(sum([heatmap[(d,h)] for h in range(12,18)], []))
+        evening = avg(sum([heatmap[(d,h)] for h in range(18,24)], []))
+        night = avg(sum([heatmap[(d,h)] for h in range(0,6)], []))
+        def star(v, max_v):
+            return "⭐" * min(int(v / max_v * 3 + 1), 3) if max_v > 0 else "  "
+        mx = max(morning, afternoon, evening, night, 1)
+        lines.append(f"  {DAY_NAMES[d]:<10} {star(morning,mx):<12} {star(afternoon,mx):<14} {star(evening,mx):<12} {star(night,mx)}")
+
+    # Top 5 video
+    lines.append("\n## 🏆 Top 5 video views cao nhất")
+    for views, date_str, title in top5:
+        lines.append(f"  - [{date_str}] {title[:60]} — {views:,.0f} views")
+
+    # Khuyến nghị
+    if sorted_days and sorted_hours:
+        best_day = DAY_NAMES[sorted_days[0][0]]
+        best_hour = sorted_hours[0][0]
+        lines.append(f"\n## 💡 Khuyến nghị")
+        lines.append(f"  Đăng vào **{best_day}**, khung giờ **{best_hour:02d}:00 - {best_hour+1:02d}:00** cho hiệu suất tốt nhất.")
+
+    return "\n".join(lines)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="YouTube Scheduler Analyzer")
+    parser.add_argument("url", help="URL kênh YouTube")
+    parser.add_argument("--limit", type=int, default=50, help="Số video phân tích (mặc định: 50)")
+    parser.add_argument("--tz", default="Asia/Ho_Chi_Minh", help="Timezone (mặc định: Asia/Ho_Chi_Minh)")
+    args = parser.parse_args()
+
+    print(f"[*] Đang lấy dữ liệu từ: {args.url}")
+    videos = fetch_video_schedule(args.url, args.limit)
+    if not videos:
+        print("[!] Không lấy được dữ liệu")
+        sys.exit(1)
+
+    channel = videos[0].get("channel", "Unknown")
+    print(f"[+] Kênh: {channel} | {len(videos)} video")
+
+    report = build_report(channel, videos, args.tz)
+
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    date_str = datetime.now().strftime('%d_%m_%Y')
+    safe_channel = re.sub(r'[^a-zA-Z0-9_]', '_', channel)[:30]
+    out_path = os.path.join(OUTPUT_DIR, f"{safe_channel}_schedule_{date_str}.txt")
+
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(report)
+
+    print(f"\n{report}")
+    print(f"\n[✓] Báo cáo lưu tại: {out_path}")
+
+
+
+============================================================
+SKILL: youtube-subtitle-extractor
+============================================================
+
+--- SKILL.md ---
+---
+name: youtube-subtitle-extractor
+description: Tải phụ đề (SRT/VTT/TXT) từ video YouTube bằng yt-dlp. Hỗ trợ auto-generated và manual subtitles, đa ngôn ngữ. Dùng khi user yêu cầu "Tải phụ đề video X", "Get subtitles from [URL]", "Extract SRT from @Channel", hoặc cần file phụ đề để phân tích nội dung.
+---
+
+# 📝 YouTube Subtitle Extractor
+
+Tải phụ đề từ YouTube video hoặc toàn bộ kênh, xuất ra file `.srt` sạch.
+
+## Cách dùng
+
+```
+python scripts/extract_subtitles.py <video_or_channel_url> [--lang vi,en] [--format srt] [--auto]
+```
+
+**Ví dụ:**
+- `Get subtitles from https://youtu.be/xxxx` → `python scripts/extract_subtitles.py https://youtu.be/xxxx`
+- `Tải phụ đề tiếng Việt` → thêm `--lang vi`
+- Chỉ lấy auto-generated → thêm `--auto`
+
+## Output
+
+```
+Youtube_Subtitles/
+└── [Video_Title]/
+    ├── [title].vi.srt
+    ├── [title].en.srt
+    └── [title]_plain.txt   ← text thuần, không có timestamp
+```
+
+## Lưu ý
+- Ưu tiên manual subtitles trước, fallback sang auto-generated nếu không có.
+- File `_plain.txt` dùng cho youtube-content-analyzer.
+- Nếu URL là kênh, tải subtitle tất cả video trong kênh (giới hạn bằng `--limit N`).
+
+
+--- scripts/extract_subtitles.py ---
+#!/usr/bin/env python3
+"""
+YouTube Subtitle Extractor
+Tải phụ đề từ YouTube video/kênh bằng yt-dlp
+Usage: python extract_subtitles.py <url> [--lang vi,en] [--format srt] [--auto] [--limit N]
+"""
+
+import subprocess
+import sys
+import os
+import re
+import argparse
+from datetime import datetime
+
+def sanitize_name(name):
+    return re.sub(r'[\\/*?:"<>|]', '_', name).strip()
+
+def extract_subtitles(url, langs="vi,en", fmt="srt", auto_only=False, limit=None):
+    base_dir = "Youtube_Subtitles"
+    os.makedirs(base_dir, exist_ok=True)
+
+    output_template = os.path.join(base_dir, "%(uploader)s", "%(title)s", "%(title)s.%(lang)s.%(ext)s")
+
+    cmd = [
+        "yt-dlp",
+        "--skip-download",
+        "--sub-langs", langs,
+        "--convert-subs", fmt,
+        "-o", output_template,
+    ]
+
+    if auto_only:
+        cmd.append("--write-auto-subs")
+    else:
+        cmd += ["--write-subs", "--write-auto-subs"]
+
+    if limit:
+        cmd += ["--playlist-end", str(limit)]
+
+    cmd.append(url)
+
+    print(f"[*] Đang tải phụ đề từ: {url}")
+    print(f"[*] Ngôn ngữ: {langs} | Format: {fmt}")
+    result = subprocess.run(cmd, capture_output=False, text=True)
+
+    if result.returncode != 0:
+        print(f"[!] Lỗi khi tải phụ đề")
+        return
+
+    # Tạo plain text từ SRT
+    for root, dirs, files in os.walk(base_dir):
+        for f in files:
+            if f.endswith(f".{fmt}"):
+                srt_path = os.path.join(root, f)
+                plain_path = srt_path.replace(f".{fmt}", "_plain.txt")
+                if not os.path.exists(plain_path):
+                    srt_to_plain(srt_path, plain_path)
+                    print(f"[+] Plain text: {plain_path}")
+
+    print(f"\n[✓] Xong! Xem tại: {base_dir}/")
+
+def srt_to_plain(srt_path, out_path):
+    """Chuyển SRT thành plain text không có timestamp"""
+    lines = []
+    with open(srt_path, "r", encoding="utf-8", errors="ignore") as f:
+        content = f.read()
+    # Xóa số thứ tự và timestamp
+    content = re.sub(r'^\d+\s*\n', '', content, flags=re.MULTILINE)
+    content = re.sub(r'\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}\n', '', content)
+    content = re.sub(r'<[^>]+>', '', content)  # Xóa HTML tags
+    content = re.sub(r'\n{3,}', '\n\n', content).strip()
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="YouTube Subtitle Extractor")
+    parser.add_argument("url", help="URL video hoặc kênh YouTube")
+    parser.add_argument("--lang", default="vi,en", help="Ngôn ngữ phụ đề (mặc định: vi,en)")
+    parser.add_argument("--format", default="srt", help="Format output (srt/vtt/ass)")
+    parser.add_argument("--auto", action="store_true", help="Chỉ lấy auto-generated subtitles")
+    parser.add_argument("--limit", type=int, help="Giới hạn số video (dành cho kênh)")
+    args = parser.parse_args()
+
+    extract_subtitles(args.url, args.lang, args.format, args.auto, args.limit)
+
+
+
+

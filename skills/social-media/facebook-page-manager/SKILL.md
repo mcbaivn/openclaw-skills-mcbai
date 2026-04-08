@@ -6,16 +6,24 @@ description: Quản lý và đăng nội dung tự động lên Facebook Fanpage
 
 # Facebook Page Manager
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
+
 Skill đăng và quản lý nội dung Facebook Page qua **Graph API v19.0** bằng Python.
 
 ## Setup nhanh
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
+
 ### 1. Cài dependencies
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 pip install requests
 ```
 
 ### 2. Lấy Access Token
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 Xem hướng dẫn chi tiết: `references/get-token.md`
 
 **Tóm tắt nhanh:**
@@ -24,6 +32,8 @@ Xem hướng dẫn chi tiết: `references/get-token.md`
 - Gọi `GET /me/accounts` để lấy **Page Access Token** và **Page ID**
 
 ### 3. Tạo config
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 Tạo file `scripts/fb_config.json`:
 ```json
 {
@@ -37,37 +47,53 @@ Tạo file `scripts/fb_config.json`:
 
 ## Script chính: `scripts/fb_post.py`
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
+
 ### Đăng text
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py text --message "Nội dung bài viết"
 ```
 
 ### Đăng ảnh
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py photo --message "Caption" --images anh1.jpg
 ```
 
 ### Carousel (nhiều ảnh)
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py photo --message "Caption" --images a.jpg b.jpg c.jpg
 ```
 
 ### Video
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py video --message "Caption" --video clip.mp4
 ```
 
 ### Reels
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py video --message "Caption" --video clip.mp4 --reel
 ```
 
 ### Story ảnh
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py story --type photo --media story.jpg
 ```
 
 ### Story video
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py story --type video --media story.mp4
 ```
@@ -75,6 +101,8 @@ python fb_post.py story --type video --media story.mp4
 ---
 
 ## Hẹn giờ đăng bài
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 
 Thêm `--schedule "YYYY-MM-DD HH:MM"` vào bất kỳ lệnh text/photo/video:
 
@@ -91,17 +119,25 @@ python fb_post.py video --message "Video mới" --video clip.mp4 --schedule "202
 
 ## Quản lý lịch đăng
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
+
 ### Xem danh sách bài hẹn giờ
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py list-scheduled
 ```
 
 ### Xóa bài
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py delete --post-id 123456789_987654321
 ```
 
 ### Đổi giờ đăng
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py reschedule --post-id 123456789_987654321 --schedule "2024-12-26 09:00"
 ```
@@ -110,24 +146,34 @@ python fb_post.py reschedule --post-id 123456789_987654321 --schedule "2024-12-2
 
 ## Quản lý Comment
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
+
 > **Permission cần thêm:** `pages_manage_engagement`
 
 ### Comment vào bài viết
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py comment --post-id 123456789_987654321 --message "Nội dung comment"
 ```
 
 ### Reply vào comment
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py reply --comment-id COMMENT_ID --message "Nội dung reply"
 ```
 
 ### Xem danh sách comment của bài viết
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py list-comments --post-id 123456789_987654321
 ```
 
 ### Xóa comment
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 ```bash
 python fb_post.py delete-comment --comment-id COMMENT_ID
 ```
@@ -136,10 +182,14 @@ python fb_post.py delete-comment --comment-id COMMENT_ID
 
 ## References
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
+
 - `references/get-token.md` — Hướng dẫn lấy Access Token từng bước
 - `references/api-reference.md` — Chi tiết endpoints, format, giới hạn
 
 ## Lưu ý quan trọng
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-facebook-page-manager`
 
 - **Page phải ở trạng thái Published** (không phải Unpublished/Restricted)
 - **Video** upload có thể mất vài phút xử lý sau khi upload xong

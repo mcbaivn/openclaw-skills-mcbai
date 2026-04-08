@@ -6,14 +6,22 @@ description: Phân tích nội dung video YouTube từ file SRT/VTT/TXT hoặc U
 
 # 🤖 YouTube Content Analyzer
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
+
 Đọc phụ đề → tóm tắt nội dung, key points, phân tích chủ đề. Không cần xem video.
 
 ## Cài đặt
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
+
 ### Cách 1 — Tải skill thẳng từ GitHub (khuyến nghị)
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
 
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
 $skillDir = "$env:USERPROFILE\.agents\skills\youtube-content-analyzer"
 New-Item -ItemType Directory -Force $skillDir | Out-Null
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-content-analyzer/SKILL.md" -OutFile "$skillDir\SKILL.md"
@@ -23,6 +31,8 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mcbaivn/openclaw-skill
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
 mkdir -p ~/.agents/skills/youtube-content-analyzer/scripts
 curl -o ~/.agents/skills/youtube-content-analyzer/SKILL.md \
   https://raw.githubusercontent.com/mcbaivn/openclaw-skills-mcbai/main/skills/youtube/youtube-content-analyzer/SKILL.md
@@ -32,19 +42,27 @@ curl -o ~/.agents/skills/youtube-content-analyzer/scripts/analyze_content.py \
 
 ### Cách 2 — Clone toàn bộ repo
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
+
 ```powershell
 # Windows
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 Copy-Item -Recurse openclaw-skills-mcbai\skills\youtube\youtube-content-analyzer $env:USERPROFILE\.agents\skills\
 ```
 
 ```bash
 # macOS / Linux
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
 git clone https://github.com/mcbaivn/openclaw-skills-mcbai.git
 cp -r openclaw-skills-mcbai/skills/youtube/youtube-content-analyzer ~/.agents/skills/
 ```
 
 ## Workflow
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
 
 **Cách 1 - Từ file SRT/TXT có sẵn:**
 ```
@@ -63,6 +81,8 @@ python scripts/analyze_content.py --folder Youtube_Subtitles/ChannelName/
 
 ## Output
 
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
+
 ```
 Youtube_Analysis/
 └── [Video_Title]_analysis_DD_MM_YYYY.txt
@@ -76,5 +96,7 @@ Youtube_Analysis/
 - 📊 **Thống kê**: độ dài, ngôn ngữ, mật độ thông tin
 
 ## Lưu ý
+
+> 📦 **Install:** `npx clawhub@latest install mcbaivn-youtube-content-analyzer`
 - Với video dài (>30 phút), script chia nhỏ thành chunks trước khi phân tích.
 - Kết hợp với `youtube-subtitle-extractor` để có pipeline đầy đủ.
