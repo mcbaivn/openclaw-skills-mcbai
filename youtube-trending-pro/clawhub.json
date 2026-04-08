@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-youtube-trending-pro",
+  "clawhub_id": "mcbaivn-youtube-trending-pro",
+  "version": "1.0.0",
+  "description": "Automate the full workflow of scanning trending videos, generating metadata, and downloading from YouTube. Manages the Checking-trending-youtube folder structure, calculates advanced Trending Score ((Views*0.6)+(Likes*0.3)+(Comments*0.1)), creates data.txt before downloading, saves videos as .webm.",
+  "description_vi": "Tự động hóa quy trình quét video trending, tạo metadata và tải video từ YouTube. Quản lý cấu trúc folder Checking-trending-youtube, tính Trending Score nâng cao ((Views*0.6)+(Likes*0.3)+(Comments*0.1)), tạo file data.txt trước khi tải và lưu video dạng .webm.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["youtube", "trending", "automation", "download", "metadata", "analytics", "webm"],
+  "category": "youtube",
+  "install_cmd": "npx clawhub@latest install mcbaivn-youtube-trending-pro",
+  "repository": "https://clawhub.com/skills/mcbaivn-youtube-trending-pro"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-youtube-content-analyzer",
+  "clawhub_id": "mcbaivn-youtube-content-analyzer",
+  "version": "1.0.0",
+  "description": "Analyze YouTube video content from SRT/VTT/TXT files or direct URL. Summarize content, extract key points, analyze main topics, and generate reports. Read video content without watching.",
+  "description_vi": "Phân tích nội dung video YouTube từ file SRT/VTT/TXT hoặc URL trực tiếp. Tóm tắt nội dung, extract key points, phân tích chủ đề chính, tạo báo cáo. Đọc nội dung video mà không cần xem.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["youtube", "content", "analyzer", "srt", "summary", "key-points", "ai"],
+  "category": "youtube",
+  "install_cmd": "npx clawhub@latest install mcbaivn-youtube-content-analyzer",
+  "repository": "https://clawhub.com/skills/mcbaivn-youtube-content-analyzer"
+}

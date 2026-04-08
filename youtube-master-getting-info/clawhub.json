@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-youtube-master-getting-info",
+  "clawhub_id": "mcbaivn-youtube-master-getting-info",
+  "version": "1.0.0",
+  "description": "Access a YouTube channel, fetch latest X videos, auto-filter duplicates from previous runs based on saved file history. Export data to 2 separate files (video_url and metadata) using standard folder structure.",
+  "description_vi": "Truy cập kênh YouTube, lấy danh sách X video mới nhất, tự động lọc trùng với các lần chạy trước dựa trên lịch sử file đã lưu. Xuất dữ liệu ra 2 file riêng biệt (video_url và metadata) theo cấu trúc folder chuẩn.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["youtube", "scraper", "channel", "metadata", "video-list", "automation"],
+  "category": "youtube",
+  "install_cmd": "npx clawhub@latest install mcbaivn-youtube-master-getting-info",
+  "repository": "https://clawhub.com/skills/mcbaivn-youtube-master-getting-info"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-youtube-subtitle-extractor",
+  "clawhub_id": "mcbaivn-youtube-subtitle-extractor",
+  "version": "1.0.0",
+  "description": "Download subtitles (SRT/VTT/TXT) from YouTube videos using yt-dlp. Supports auto-generated and manual subtitles, multi-language. Use when you need subtitle files for content analysis.",
+  "description_vi": "Tải phụ đề (SRT/VTT/TXT) từ video YouTube bằng yt-dlp. Hỗ trợ auto-generated và manual subtitles, đa ngôn ngữ. Dùng khi cần file phụ đề để phân tích nội dung.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["youtube", "subtitle", "srt", "vtt", "yt-dlp", "extractor", "captions"],
+  "category": "youtube",
+  "install_cmd": "npx clawhub@latest install mcbaivn-youtube-subtitle-extractor",
+  "repository": "https://clawhub.com/skills/mcbaivn-youtube-subtitle-extractor"
+}

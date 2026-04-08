@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-download-aio",
+  "clawhub_id": "mcbaivn-download-aio",
+  "version": "1.0.0",
+  "description": "Download videos, audio, playlists, subtitles, and thumbnails from ANY platform (YouTube, TikTok, Instagram, Facebook, Twitter/X, Twitch, Vimeo, SoundCloud, Reddit, and 1000+ more) using yt-dlp. After download, automatically send file to Telegram if under 50MB.",
+  "description_vi": "Tải video, audio, playlist, phụ đề, thumbnail từ 1000+ nền tảng bằng yt-dlp. Sau khi tải tự động gửi file về Telegram nếu dung lượng <= 50MB.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["download", "video", "audio", "youtube", "tiktok", "instagram", "yt-dlp", "telegram"],
+  "category": "media",
+  "install_cmd": "npx clawhub@latest install mcbaivn-download-aio",
+  "repository": "https://clawhub.com/skills/mcbaivn-download-aio"
+}

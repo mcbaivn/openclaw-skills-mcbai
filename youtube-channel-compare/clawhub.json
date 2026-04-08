@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-youtube-channel-compare",
+  "clawhub_id": "mcbaivn-youtube-channel-compare",
+  "version": "1.0.0",
+  "description": "Compare 2-5 YouTube channels by views, engagement rate, trending score and posting frequency. Use when you need competitive analysis data between channels.",
+  "description_vi": "So sánh 2-5 kênh YouTube theo views, engagement rate, trending score và tần suất đăng bài. Dùng khi cần dữ liệu phân tích cạnh tranh giữa các kênh.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["youtube", "analytics", "compare", "channel", "engagement", "trending"],
+  "category": "youtube",
+  "install_cmd": "npx clawhub@latest install mcbaivn-youtube-channel-compare",
+  "repository": "https://clawhub.com/skills/mcbaivn-youtube-channel-compare"
+}

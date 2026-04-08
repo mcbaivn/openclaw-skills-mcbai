@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-youtube-scheduler",
+  "clawhub_id": "mcbaivn-youtube-scheduler",
+  "version": "1.0.0",
+  "description": "Analyze a YouTube channel's posting schedule to find 'golden hours' — the time slots with the highest views and engagement. Optimize your content publishing schedule based on real channel data.",
+  "description_vi": "Phân tích lịch đăng video của kênh YouTube để tìm 'khung giờ vàng' — thời điểm đăng có nhiều view và engagement nhất. Tối ưu lịch đăng nội dung dựa trên dữ liệu thực của kênh.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["youtube", "scheduler", "analytics", "golden-hour", "engagement", "posting-time"],
+  "category": "youtube",
+  "install_cmd": "npx clawhub@latest install mcbaivn-youtube-scheduler",
+  "repository": "https://clawhub.com/skills/mcbaivn-youtube-scheduler"
+}

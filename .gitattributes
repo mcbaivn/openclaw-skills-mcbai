@@ -1,0 +1,17 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force LF for these files
+*.md text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.ps1 text eol=lf
+*.sh text eol=lf
+
+# Binary files
+*.webm binary
+*.mp4 binary
+*.mp3 binary
+*.zip binary
+*.skill binary

@@ -8,11 +8,19 @@ youtube-trending-skills/
 # SRT / subtitle data files
 *.srt
 *.vtt
-*.json
 *.txt
 *.webm
 *.mp4
 *.mp3
+
+# JSON data files (NOT clawhub.json or config files)
+*.data.json
+srt_clean.json
+srt_parsed.json
+
+# Allow skill config files
+!clawhub.json
+!fb_config.json.example
 
 # Memory files (private)
 memory/
