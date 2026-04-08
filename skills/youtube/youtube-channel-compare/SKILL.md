@@ -21,13 +21,12 @@ npx clawhub@latest install mcbaivn-youtube-channel-compare
 
 ## Sử dụng
 
-```bash
+```
 python scripts/compare_channels.py <url1> <url2> [url3...] [--limit N]
 ```
 
 **Ví dụ:**
-- `So sánh @MrBeast vs @PewDiePie`
-  → `python scripts/compare_channels.py https://youtube.com/@MrBeast https://youtube.com/@PewDiePie --limit 20`
+- `So sánh @MrBeast vs @PewDiePie` → `python scripts/compare_channels.py https://youtube.com/@MrBeast https://youtube.com/@PewDiePie --limit 20`
 
 ## Output
 

@@ -22,13 +22,12 @@ npx clawhub@latest install mcbaivn-youtube-subtitle-extractor
 
 ## Sử dụng
 
-```bash
+```
 python scripts/extract_subtitles.py <video_or_channel_url> [--lang vi,en] [--format srt] [--auto]
 ```
 
 **Ví dụ:**
-- `Tải phụ đề từ https://youtu.be/xxxx`
-  → `python scripts/extract_subtitles.py https://youtu.be/xxxx`
+- `Tải phụ đề từ https://youtu.be/xxxx` → `python scripts/extract_subtitles.py https://youtu.be/xxxx`
 - `Tải phụ đề tiếng Việt` → thêm `--lang vi`
 - Chỉ lấy auto-generated → thêm `--auto`
 

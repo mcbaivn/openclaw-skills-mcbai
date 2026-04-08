@@ -25,7 +25,7 @@ npx clawhub@latest install mcbaivn-download-aio
 
 > Sau khi cài, chạy script setup dependencies lần đầu:
 > ```powershell
-> powershell -ExecutionPolicy Bypass -File scripts/install.ps1
+> powershell -ExecutionPolicy Bypass -File $env:USERPROFILE\.agents\skills\download-aio\scripts\install.ps1
 > ```
 > Script tự động cài: Python check, yt-dlp, ffmpeg.
 

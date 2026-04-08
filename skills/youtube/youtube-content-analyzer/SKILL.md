@@ -23,18 +23,18 @@ npx clawhub@latest install mcbaivn-youtube-content-analyzer
 
 ## Workflow
 
-**Cách 1 - Từ file SRT/TXT có sẵn:**
-```bash
+**Cách 1 — Từ file SRT/TXT có sẵn:**
+```
 python scripts/analyze_content.py --file path/to/subtitle.srt
 ```
 
-**Cách 2 - Từ URL (tự tải subtitle rồi phân tích):**
-```bash
+**Cách 2 — Từ URL (tự tải subtitle rồi phân tích):**
+```
 python scripts/analyze_content.py --url https://youtu.be/xxxx [--lang vi]
 ```
 
-**Cách 3 - Phân tích hàng loạt:**
-```bash
+**Cách 3 — Phân tích hàng loạt:**
+```
 python scripts/analyze_content.py --folder Youtube_Subtitles/ChannelName/
 ```
 

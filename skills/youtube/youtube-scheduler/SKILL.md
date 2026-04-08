@@ -23,13 +23,12 @@ npx clawhub@latest install mcbaivn-youtube-scheduler
 
 ## Sử dụng
 
-```bash
+```
 python scripts/analyze_schedule.py <channel_url> [--limit N] [--tz Asia/Ho_Chi_Minh]
 ```
 
 **Ví dụ:**
-- `Tìm giờ vàng @MrBeast`
-  → `python scripts/analyze_schedule.py https://youtube.com/@MrBeast --limit 50`
+- `Tìm giờ vàng @MrBeast` → `python scripts/analyze_schedule.py https://youtube.com/@MrBeast --limit 50`
 - Đổi timezone → thêm `--tz Asia/Ho_Chi_Minh` (mặc định UTC)
 
 ## Output
