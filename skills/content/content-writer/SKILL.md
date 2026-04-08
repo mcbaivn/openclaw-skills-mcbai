@@ -1,7 +1,8 @@
 ---
 name: content-writer
 clawhub_id: mcbaivn-content-writer
-description: Tạo bài đăng mạng xã hội chất lượng cao từ bài viết nghiên cứu và dữ liệu nguồn. Hỗ trợ nhiều nền tảng (LinkedIn, Facebook, Twitter/X, TikTok, Threads), 6 định dạng nội dung (Toplist, POV, Case Study, How-to, Story, Hook-List-CTA), nhiều tone giọng (mặc định, mạnh mẽ, giáo dục, kể chuyện, phân tích, viral, đồng cảm, tùy chỉnh), 3 độ dài (ngắn/vừa/dài), 2 ngôn ngữ (Anh/Việt). Dùng khi user muốn viết bài, tạo nội dung mạng xã hội, soạn content từ dữ liệu nghiên cứu, hoặc yêu cầu "viết bài", "tạo nội dung", "draft a post", "viết post từ bài này".
+description: |
+  Tạo bài đăng mạng xã hội chất lượng cao từ bài viết nghiên cứu và dữ liệu nguồn. Hỗ trợ nhiều nền tảng (LinkedIn, Facebook, Twitter/X, TikTok, Threads), 6 định dạng nội dung (Toplist, POV, Case Study, How-to, Story, Hook-List-CTA), nhiều tone giọng (mặc định, mạnh mẽ, giáo dục, kể chuyện, phân tích, viral, đồng cảm, tùy chỉnh), 3 độ dài (ngắn/vừa/dài), 2 ngôn ngữ (Anh/Việt). Dùng khi user muốn viết bài, tạo nội dung mạng xã hội, soạn content từ dữ liệu nghiên cứu, hoặc yêu cầu "viết bài", "tạo nội dung", "draft a post", "viết post từ bài này".
 ---
 
 # Content Writer Skill

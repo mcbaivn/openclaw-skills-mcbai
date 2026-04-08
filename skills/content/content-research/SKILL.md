@@ -1,7 +1,8 @@
 ---
 name: content-research
 clawhub_id: mcbaivn-content-research
-description: Tìm kiếm và khám phá nguồn nội dung trending cho bất kỳ chủ đề nào bằng web search. Dùng khi user muốn tìm bài viết, tin tức, blog, hoặc nội dung trending về một chủ đề cụ thể để tạo content, viết bài LinkedIn, mạng xã hội, hoặc tổng hợp nội dung. Kích hoạt khi user đề cập "research chủ đề", "tìm bài viết về", "tin tức trending", "nguồn nội dung", "tìm kiếm content", hoặc muốn thu thập dữ liệu/nguồn trước khi viết bài.
+description: |
+  Tìm kiếm và khám phá nguồn nội dung trending cho bất kỳ chủ đề nào bằng web search. Dùng khi user muốn tìm bài viết, tin tức, blog, hoặc nội dung trending về một chủ đề cụ thể để tạo content, viết bài LinkedIn, mạng xã hội, hoặc tổng hợp nội dung. Kích hoạt khi user đề cập "research chủ đề", "tìm bài viết về", "tin tức trending", "nguồn nội dung", "tìm kiếm content", hoặc muốn thu thập dữ liệu/nguồn trước khi viết bài.
 ---
 
 # Content Research Skill

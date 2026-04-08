@@ -1,7 +1,8 @@
 ---
 name: youtube-trending-pro
 clawhub_id: mcbaivn-youtube-trending-pro
-description: Automate the full workflow of scanning trending videos, generating metadata, and downloading from YouTube. Manages the Checking-trending-youtube folder structure, calculates advanced Trending Score ((Views*0.6)+(Likes*0.3)+(Comments*0.1)), creates data.txt before downloading, saves videos as .webm. Use when user asks "Trending X Video @Channel" or needs to scan a list of channels.
+description: |
+  Automate the full workflow of scanning trending videos, generating metadata, and downloading from YouTube. Manages the Checking-trending-youtube folder structure, calculates advanced Trending Score ((Views*0.6)+(Likes*0.3)+(Comments*0.1)), creates data.txt before downloading, saves videos as .webm. Use when user asks "Trending X Video @Channel" or needs to scan a list of channels.
 ---
 
 # ≡ƒöÑ Youtube Trending Pro (OpenClaw)

@@ -1,7 +1,8 @@
 ---
 name: youtube-master-getting-info
 clawhub_id: mcbaivn-youtube-master-getting-info
-description: Access a YouTube channel, fetch latest X videos, auto-filter duplicates from previous runs based on saved file history. Export data to 2 separate files (video_url and metadata) using standard folder structure. Use when user asks "Get X videos from @Channel" or "Qu├⌐t th├┤ng tin k├¬nh".
+description: |
+  Access a YouTube channel, fetch latest X videos, auto-filter duplicates from previous runs based on saved file history. Export data to 2 separate files (video_url and metadata) using standard folder structure. Use when user asks "Get X videos from @Channel" or "Qu├⌐t th├┤ng tin k├¬nh".
 ---
 
 # ≡ƒÄ» Youtube Master Getting Info
