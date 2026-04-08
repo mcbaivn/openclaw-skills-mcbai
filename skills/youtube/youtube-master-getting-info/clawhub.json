@@ -1,0 +1,12 @@
+{
+  "name": "mcbaivn-youtube-master-getting-info",
+  "clawhub_id": "mcbaivn-youtube-master-getting-info",
+  "version": "1.0.0",
+  "description": "Access a YouTube channel, fetch latest X videos, auto-filter duplicates from previous runs based on saved file history. Export data to 2 separate files (video_url and metadata) using standard folder structure.",
+  "description_vi": "Truy cß║¡p k├¬nh YouTube, lß║Ñy danh s├ích X video mß╗¢i nhß║Ñt, tß╗▒ ─æß╗Öng lß╗ìc tr├╣ng vß╗¢i c├íc lß║ºn chß║íy tr╞░ß╗¢c dß╗▒a tr├¬n lß╗ïch sß╗¡ file ─æ├ú l╞░u. Xuß║Ñt dß╗» liß╗çu ra 2 file ri├¬ng biß╗çt (video_url v├á metadata) theo cß║Ñu tr├║c folder chuß║⌐n.",
+  "author": "Bß║▒ng (mcbaivn)",
+  "tags": ["youtube", "scraper", "channel", "metadata", "video-list", "automation"],
+  "category": "youtube",
+  "install_cmd": "npx clawhub@latest install mcbaivn-youtube-master-getting-info",
+  "repository": "https://clawhub.com/skills/mcbaivn-youtube-master-getting-info"
+}
