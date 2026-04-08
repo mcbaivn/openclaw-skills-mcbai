@@ -1,0 +1,12 @@
+﻿{
+  "name": "mcbaivn-subtitle-translator",
+  "clawhub_id": "mcbaivn-subtitle-translator",
+  "version": "1.0.0",
+  "description": "Translate SRT subtitle files into any language using AI. Batch processing, preserves timing.",
+  "description_vi": "Dịch file SRT sang bất kỳ ngôn ngữ nào bằng AI. Xử lý theo lô, giữ nguyên timing.",
+  "author": "Bằng (mcbaivn)",
+  "tags": ["subtitle","srt","translate","ai","language"],
+  "category": "media",
+  "install_cmd": "npx clawhub@latest install mcbaivn-subtitle-translator",
+  "repository": "https://clawhub.com/skills/mcbaivn-subtitle-translator"
+}
