@@ -24,7 +24,6 @@ npx clawhub@latest install mcbaivn-youtube-trending-pro
 npx clawhub@latest install mcbaivn-content-research
 npx clawhub@latest install mcbaivn-content-writer
 npx clawhub@latest install mcbaivn-facebook-page-manager
-npx clawhub@latest install douyin-dubber
 ```
 
 > Skills tự động tải vào `~/.agents/skills/` — không cần biết git hay cấu trúc repo.
@@ -45,7 +44,7 @@ Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\ski
 
 ---
 
-## Danh sách tất cả Skills (12 skills)
+## Danh sách tất cả Skills (11 skills)
 
 | Skill | Mô tả | Cài đặt | Category |
 |-------|-------|---------|----------|
@@ -59,7 +58,6 @@ Copy-Item -Recurse openclaw-skills-mcbai\skills\*\* $env:USERPROFILE\.agents\ski
 | [youtube-trending-pro](skills/youtube/youtube-trending-pro/) | Quét trending, tính Trending Score, tải video .webm | `npx clawhub@latest install mcbaivn-youtube-trending-pro` | 🎬 YouTube |
 | [content-research](skills/content/content-research/) | Tìm bài viết & tin tức trending (Brave + Tavily song song) | `npx clawhub@latest install mcbaivn-content-research` | ✍️ Content |
 | [content-writer](skills/content/content-writer/) | Viết post đa nền tảng (6 format, 8 tone, EN/VI) | `npx clawhub@latest install mcbaivn-content-writer` | ✍️ Content |
-| [douyin-dubber](skills/content/douyin-dubber/) | Tự động lồng tiếng video Douyin/TikTok sang ngôn ngữ bất kỳ | `npx clawhub@latest install douyin-dubber` | ✍️ Content |
 | [facebook-page-manager](skills/social-media/facebook-page-manager/) | Đăng & quản lý nội dung Facebook Page tự động | `npx clawhub@latest install mcbaivn-facebook-page-manager` | 📱 Social Media |
 
 > 🔄 Cập nhật thêm thường xuyên. **Star repo** để không bỏ lỡ!
@@ -105,12 +103,10 @@ youtube-master-getting-info → youtube-trending-pro → download
 |-------|-------|---------|
 | [content-research](skills/content/content-research/) | Tìm bài viết & tin tức trending từ web (Brave + Tavily song song) | `npx clawhub@latest install mcbaivn-content-research` |
 | [content-writer](skills/content/content-writer/) | Viết post cho LinkedIn, Facebook, Twitter/X, TikTok, Threads | `npx clawhub@latest install mcbaivn-content-writer` |
-| [douyin-dubber](skills/content/douyin-dubber/) | Tự động lồng tiếng video Douyin/TikTok: tải → transcribe (Whisper) → dịch → TTS → ghép video | `npx clawhub@latest install douyin-dubber` |
 
 **Pipeline gợi ý:**
 ```
 content-research → content-writer → facebook-page-manager
-douyin-dubber → facebook-page-manager (đăng video đã lồng tiếng)
 ```
 
 ---
@@ -143,7 +139,6 @@ openclaw-skills-mcbai/
     ├── content/           ✍️ Content
     │   ├── content-research/
     │   ├── content-writer/
-    │   └── douyin-dubber/
     └── social-media/      📱 Social Media
         └── facebook-page-manager/
 ```
